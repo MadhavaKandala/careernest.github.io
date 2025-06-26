@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Mastery - CareerNest</title>
+    <meta name="description" content="Track your skills development and earn certifications to boost your career.">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/mastery.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <style>
+      .pill-navbar {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: transparent;
+        margin: 2rem 0 2.5rem 0;
+        position: fixed;
+        top: 0.1px;
+        left: 0;
+        z-index: 99;
+        pointer-events: none;
+      }
+      .pill-nav-list {
+        display: flex;
+        gap: 2rem;
+        background: #fafafa;
+        border: 2px solid #ededed;
+        border-radius: 2.5rem;
+        padding: 0.5rem 1.5rem;
+        list-style: none;
+        box-shadow: 0 2px 8px rgba(80,80,120,0.04);
+        pointer-events: auto;
+      }
+      .pill-nav-link {
+        display: inline-block;
+        padding: 0.7rem 1.7rem;
+        border-radius: 2rem;
+        color: #6b6b6b;
+        font-weight: 600;
+        font-size: 1.1rem;
+        background: transparent;
+        transition: background 0.25s, color 0.25s, box-shadow 0.25s;
+        text-decoration: none;
+        outline: none;
+        position: relative;
+      }
+      .pill-nav-link:focus {
+        box-shadow: 0 0 0 2px #6366f1;
+      }
+      .pill-nav-link:hover {
+        background: #e5e7eb;
+        color: #4f46e5;
+      }
+      .pill-nav-link.active, .pill-nav-link[aria-current="page"] {
+        background: linear-gradient(135deg, #6366f1 0%, #6d28d9 100%);
+        color: #fff;
+        box-shadow: 0 2px 8px rgba(80,80,120,0.08);
+      }
+      @media (max-width: 700px) {
+        .pill-navbar {
+          top: 0.1px;
+        }
+        .pill-nav-list {
+          gap: 0.5rem;
+          padding: 0.5rem 0.5rem;
+        }
+        .pill-nav-link {
+          font-size: 1rem;
+          padding: 0.6rem 1rem;
+        }
+      }
+      .floating-profile {
+        position: fixed;
+        top: 32px;
+        right: 48px;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        background: #fff;
+        border-radius: 2rem;
+        box-shadow: 0 2px 8px rgba(80,80,120,0.08);
+        padding: 0.5rem;
+        border: 1.5px solid #ededed;
+        min-width: unset;
+        transition: box-shadow 0.2s;
+        gap: 0;
+      }
+      .floating-profile:hover, .floating-profile:focus-within {
+        box-shadow: 0 6px 24px rgba(80,80,120,0.13);
+      }
+      .profile-avatar {
+        width: 2.5rem;
+        height: 2.5rem;
+        background: linear-gradient(135deg, #6366f1 0%, #6d28d9 100%);
+        color: #fff;
+        font-weight: 700;
+        font-size: 1.2rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 1px 4px rgba(80,80,120,0.08);
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        transition: box-shadow 0.2s;
+        z-index: 2;
+      }
+      .profile-toggle {
+        display: none;
+      }
+      .profile-dropdown-label {
+        display: block;
+        position: absolute;
+        right: 0.5rem;
+        top: 0.5rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        cursor: pointer;
+        z-index: 3;
+      }
+      .profile-dropdown {
+        display: none;
+        position: absolute;
+        top: 3.5rem;
+        right: 0;
+        background: #fff;
+        border-radius: 1rem;
+        box-shadow: 0 4px 16px rgba(80,80,120,0.13);
+        border: 1.5px solid #ededed;
+        min-width: 140px;
+        padding: 0.5rem 0;
+        flex-direction: column;
+        z-index: 10;
+      }
+      .profile-dropdown-item {
+        display: block;
+        padding: 0.7rem 1.5rem;
+        color: #4b5563;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1rem;
+        transition: background 0.2s, color 0.2s;
+        border: none;
+        background: none;
+        text-align: left;
+        cursor: pointer;
+      }
+      .profile-dropdown-item:hover {
+        background: #f3f4f6;
+        color: #6366f1;
+      }
+      .profile-toggle:checked ~ .profile-dropdown,
+      .floating-profile:focus-within .profile-dropdown {
+        display: flex;
+      }
+    </style>
+</head>
+<body>
+    <nav class="pill-navbar" aria-label="Main Navigation">
+      <ul class="pill-nav-list">
+        <li><a href="dashboard.html" class="pill-nav-link">Dashboard</a></li>
+        <li><a href="jobs.html" class="pill-nav-link">Jobs</a></li>
+        <li><a href="resume.html" class="pill-nav-link">Resume</a></li>
+        <li><a href="interview.html" class="pill-nav-link">Interview</a></li>
+        <li><a href="mastery.html" class="pill-nav-link active" aria-current="page">Mastery</a></li>
+      </ul>
+    </nav>
+    <div class="floating-profile" tabindex="0">
+      <div class="profile-avatar">JD</div>
+      <input type="checkbox" id="profile-toggle" class="profile-toggle" aria-label="Open profile menu">
+      <label for="profile-toggle" class="profile-dropdown-label"></label>
+      <div class="profile-dropdown">
+        <a href="profile.html" class="profile-dropdown-item">Profile</a>
+        <a href="home.html" class="profile-dropdown-item">Sign Out</a>
+      </div>
+    </div>
+
+    <main class="main-content" style="margin-top: 5.5rem;">
+        <div class="mastery-header">
+            <h1>Skill Mastery</h1>
+            <p>Track your progress and develop the skills that matter most to employers</p>
+        </div>
+
+        <div class="mastery-overview">
+            <div class="overview-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>12</h3>
+                        <p>Skills Mastered</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>8</h3>
+                        <p>Certifications Earned</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>124h</h3>
+                        <p>Learning Time</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>85%</h3>
+                        <p>Overall Progress</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="skills-container">
+            <div class="skills-categories">
+                <h3>Skill Categories</h3>
+                <div class="category-list">
+                    <div class="category-item active">
+                        <i class="fas fa-code"></i>
+                        <span>Programming</span>
+                    </div>
+                    <div class="category-item">
+                        <i class="fas fa-palette"></i>
+                        <span>Frontend</span>
+                    </div>
+                    <div class="category-item">
+                        <i class="fas fa-server"></i>
+                        <span>Backend</span>
+                    </div>
+                    <div class="category-item">
+                        <i class="fas fa-database"></i>
+                        <span>Database</span>
+                    </div>
+                    <div class="category-item">
+                        <i class="fas fa-cloud"></i>
+                        <span>Cloud</span>
+                    </div>
+                    <div class="category-item">
+                        <i class="fas fa-users"></i>
+                        <span>Soft Skills</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">
+                            <i class="fab fa-js-square"></i>
+                        </div>
+                        <div class="skill-info">
+                            <h4>JavaScript</h4>
+                            <p>Programming Language</p>
+                        </div>
+                        <div class="skill-level">Advanced</div>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-actions">
+                        <button class="btn-secondary">Practice</button>
+                        <button class="btn-primary">Take Test</button>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">
+                            <i class="fab fa-react"></i>
+                        </div>
+                        <div class="skill-info">
+                            <h4>React</h4>
+                            <p>Frontend Framework</p>
+                        </div>
+                        <div class="skill-level">Intermediate</div>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 70%"></div>
+                        </div>
+                        <span>70%</span>
+                    </div>
+                    <div class="skill-actions">
+                        <button class="btn-secondary">Practice</button>
+                        <button class="btn-primary">Take Test</button>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">
+                            <i class="fab fa-node-js"></i>
+                        </div>
+                        <div class="skill-info">
+                            <h4>Node.js</h4>
+                            <p>Backend Runtime</p>
+                        </div>
+                        <div class="skill-level">Intermediate</div>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 65%"></div>
+                        </div>
+                        <span>65%</span>
+                    </div>
+                    <div class="skill-actions">
+                        <button class="btn-secondary">Practice</button>
+                        <button class="btn-primary">Take Test</button>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <div class="skill-info">
+                            <h4>Python</h4>
+                            <p>Programming Language</p>
+                        </div>
+                        <div class="skill-level">Beginner</div>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 40%"></div>
+                        </div>
+                        <span>40%</span>
+                    </div>
+                    <div class="skill-actions">
+                        <button class="btn-secondary">Practice</button>
+                        <button class="btn-primary">Take Test</button>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="skill-info">
+                            <h4>SQL</h4>
+                            <p>Database Language</p>
+                        </div>
+                        <div class="skill-level">Intermediate</div>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 60%"></div>
+                        </div>
+                        <span>60%</span>
+                    </div>
+                    <div class="skill-actions">
+                        <button class="btn-secondary">Practice</button>
+                        <button class="btn-primary">Take Test</button>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">
+                            <i class="fab fa-git-alt"></i>
+                        </div>
+                        <div class="skill-info">
+                            <h4>Git</h4>
+                            <p>Version Control</p>
+                        </div>
+                        <div class="skill-level">Advanced</div>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 80%"></div>
+                        </div>
+                        <span>80%</span>
+                    </div>
+                    <div class="skill-actions">
+                        <button class="btn-secondary">Practice</button>
+                        <button class="btn-primary">Take Test</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="learning-path">
+            <h3>Recommended Learning Path</h3>
+            <div class="path-steps">
+                <div class="path-step completed">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>HTML & CSS Basics</h4>
+                        <p>Foundation of web development</p>
+                    </div>
+                    <div class="step-status">
+                        <i class="fas fa-check"></i>
+                    </div>
+                </div>
+                <div class="path-step completed">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>JavaScript Fundamentals</h4>
+                        <p>Core programming concepts</p>
+                    </div>
+                    <div class="step-status">
+                        <i class="fas fa-check"></i>
+                    </div>
+                </div>
+                <div class="path-step current">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>React Development</h4>
+                        <p>Modern frontend framework</p>
+                    </div>
+                    <div class="step-status">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="path-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Backend with Node.js</h4>
+                        <p>Server-side development</p>
+                    </div>
+                    <div class="step-status">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="js/common.js"></script>
+    <script src="js/mastery.js"></script>
+</body>
+</html>

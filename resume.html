@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume Builder | Career Development Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#2D5BFF", secondary: "#4A4A4A" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body {
+          font-family: 'Inter', sans-serif;
+      }
+      .drag-handle {
+          cursor: grab;
+      }
+      .drag-handle:active {
+          cursor: grabbing;
+      }
+      .resume-section:hover .section-controls {
+          opacity: 1;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+          background: #2D5BFF;
+          cursor: pointer;
+      }
+      input[type="range"]::-moz-range-thumb {
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+          background: #2D5BFF;
+          cursor: pointer;
+      }
+      .template-option:hover .template-preview {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+      .custom-checkbox {
+          display: flex;
+          align-items: center;
+          position: relative;
+          cursor: pointer;
+      }
+      .custom-checkbox input {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+      }
+      .checkmark {
+          height: 20px;
+          width: 20px;
+          background-color: #fff;
+          border: 2px solid #e2e8f0;
+          border-radius: 4px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+      .custom-checkbox input:checked ~ .checkmark {
+          background-color: #2D5BFF;
+          border-color: #2D5BFF;
+      }
+      .checkmark:after {
+          content: "";
+          display: none;
+          width: 5px;
+          height: 10px;
+          border: solid white;
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg);
+      }
+      .custom-checkbox input:checked ~ .checkmark:after {
+          display: block;
+      }
+      .custom-switch {
+          position: relative;
+          display: inline-block;
+          width: 44px;
+          height: 24px;
+      }
+      .custom-switch input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+      }
+      .switch-slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #e2e8f0;
+          transition: .4s;
+          border-radius: 24px;
+      }
+      .switch-slider:before {
+          position: absolute;
+          content: "";
+          height: 18px;
+          width: 18px;
+          left: 3px;
+          bottom: 3px;
+          background-color: white;
+          transition: .4s;
+          border-radius: 50%;
+      }
+      input:checked + .switch-slider {
+          background-color: #2D5BFF;
+      }
+      input:checked + .switch-slider:before {
+          transform: translateX(20px);
+      }
+      .pill-navbar {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: transparent;
+        margin: 2rem 0 2.5rem 0;
+        position: fixed;
+        top: 0.1px;
+        left: 0;
+        z-index: 99;
+        pointer-events: none;
+      }
+      .pill-nav-list {
+        display: flex;
+        gap: 2rem;
+        background: #fafafa;
+        border: 2px solid #ededed;
+        border-radius: 2.5rem;
+        padding: 0.5rem 1.5rem;
+        list-style: none;
+        box-shadow: 0 2px 8px rgba(80,80,120,0.04);
+        pointer-events: auto;
+      }
+      .pill-nav-link {
+        display: inline-block;
+        padding: 0.7rem 1.7rem;
+        border-radius: 2rem;
+        color: #6b6b6b;
+        font-weight: 600;
+        font-size: 1.1rem;
+        background: transparent;
+        transition: background 0.25s, color 0.25s, box-shadow 0.25s;
+        text-decoration: none;
+        outline: none;
+        position: relative;
+      }
+      .pill-nav-link:focus {
+        box-shadow: 0 0 0 2px #6366f1;
+      }
+      .pill-nav-link:hover {
+        background: #e5e7eb;
+        color: #4f46e5;
+      }
+      .pill-nav-link.active, .pill-nav-link[aria-current="page"] {
+        background: linear-gradient(135deg, #6366f1 0%, #6d28d9 100%);
+        color: #fff;
+        box-shadow: 0 2px 8px rgba(80,80,120,0.08);
+      }
+      @media (max-width: 700px) {
+        .pill-navbar {
+          top: 0.1px;
+        }
+        .pill-nav-list {
+          gap: 0.5rem;
+          padding: 0.5rem 0.5rem;
+        }
+        .pill-nav-link {
+          font-size: 1rem;
+          padding: 0.6rem 1rem;
+        }
+      }
+      .floating-profile {
+        position: fixed;
+        top: 32px;
+        right: 48px;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        background: #fff;
+        border-radius: 2rem;
+        box-shadow: 0 2px 8px rgba(80,80,120,0.08);
+        padding: 0.5rem;
+        border: 1.5px solid #ededed;
+        min-width: unset;
+        transition: box-shadow 0.2s;
+        gap: 0;
+      }
+      .floating-profile:hover, .floating-profile:focus-within {
+        box-shadow: 0 6px 24px rgba(80,80,120,0.13);
+      }
+      .profile-avatar {
+        width: 2.5rem;
+        height: 2.5rem;
+        background: linear-gradient(135deg, #6366f1 0%, #6d28d9 100%);
+        color: #fff;
+        font-weight: 700;
+        font-size: 1.2rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 1px 4px rgba(80,80,120,0.08);
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        transition: box-shadow 0.2s;
+        z-index: 2;
+      }
+      .profile-toggle {
+        display: none;
+      }
+      .profile-dropdown-label {
+        display: block;
+        position: absolute;
+        right: 0.5rem;
+        top: 0.5rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        cursor: pointer;
+        z-index: 3;
+      }
+      .profile-dropdown {
+        display: none;
+        position: absolute;
+        top: 3.5rem;
+        right: 0;
+        background: #fff;
+        border-radius: 1rem;
+        box-shadow: 0 4px 16px rgba(80,80,120,0.13);
+        border: 1.5px solid #ededed;
+        min-width: 140px;
+        padding: 0.5rem 0;
+        flex-direction: column;
+        z-index: 10;
+      }
+      .profile-dropdown-item {
+        display: block;
+        padding: 0.7rem 1.5rem;
+        color: #4b5563;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1rem;
+        transition: background 0.2s, color 0.2s;
+        border: none;
+        background: none;
+        text-align: left;
+        cursor: pointer;
+      }
+      .profile-dropdown-item:hover {
+        background: #f3f4f6;
+        color: #6366f1;
+      }
+      .profile-toggle:checked ~ .profile-dropdown,
+      .floating-profile:focus-within .profile-dropdown {
+        display: flex;
+      }
+      @media (max-width: 900px) {
+        .floating-profile {
+          top: 4.5rem;
+        }
+      }
+      @media (max-width: 700px) {
+        .floating-profile {
+          top: 4.2rem;
+          right: 8px;
+          padding: 0.4rem;
+        }
+        .profile-avatar {
+          width: 2rem;
+          height: 2rem;
+          font-size: 1rem;
+        }
+        .profile-dropdown-label {
+          width: 2rem;
+          height: 2rem;
+          top: 0.2rem;
+          right: 0.2rem;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+    <!-- Pill Navigation Bar -->
+    <nav class="pill-navbar" aria-label="Main Navigation">
+      <ul class="pill-nav-list">
+        <li><a href="dashboard.html" class="pill-nav-link">Dashboard</a></li>
+        <li><a href="jobs.html" class="pill-nav-link">Jobs</a></li>
+        <li><a href="resume.html" class="pill-nav-link active" aria-current="page">Resume</a></li>
+        <li><a href="interview.html" class="pill-nav-link">Interview</a></li>
+        <li><a href="mastery.html" class="pill-nav-link">Mastery</a></li>
+      </ul>
+    </nav>
+
+    <!-- Floating Profile Box -->
+    <div class="floating-profile" tabindex="0">
+      <div class="profile-avatar">JD</div>
+      <input type="checkbox" id="profile-toggle" class="profile-toggle" aria-label="Open profile menu">
+      <label for="profile-toggle" class="profile-dropdown-label"></label>
+      <div class="profile-dropdown">
+        <a href="profile.html" class="profile-dropdown-item">Profile</a>
+        <a href="home.html" class="profile-dropdown-item">Sign Out</a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" style="margin-top: 5.5rem;">
+      <!-- Resume Builder Header -->
+      <div class="mb-8">
+        <div
+          class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6"
+        >
+          <div>
+            <h1 class="text-2xl font-bold text-gray-900">Resume Builder</h1>
+            <p class="text-sm text-gray-500 mt-1">
+              Create a professional resume that stands out
+            </p>
+          </div>
+          <div class="mt-4 sm:mt-0 flex space-x-3">
+            <button
+              type="button"
+              class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium !rounded-button text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary whitespace-nowrap"
+            >
+              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                <i class="ri-save-line"></i>
+              </div>
+              Save
+            </button>
+            <button
+              type="button"
+              class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium !rounded-button text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary whitespace-nowrap"
+            >
+              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                <i class="ri-download-line"></i>
+              </div>
+              Download
+            </button>
+            <button
+              type="button"
+              class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium !rounded-button text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary whitespace-nowrap"
+            >
+              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                <i class="ri-share-line"></i>
+              </div>
+              Share
+            </button>
+          </div>
+        </div>
+
+        <!-- Resume Strength -->
+        <div class="bg-white p-4 rounded-lg shadow-sm mb-6 flex flex-wrap justify-around items-center gap-4">
+            <div class="text-center">
+                <h3 class="font-medium text-gray-900 text-sm sm:text-base">Resume Strength</h3>
+                <p class="text-primary font-bold text-xl sm:text-2xl">75%</p>
+            </div>
+            <div class="w-px bg-gray-200 h-12 hidden sm:block"></div>
+            <div class="text-center">
+                <h3 class="font-medium text-gray-900 text-sm sm:text-base">ATS Compatibility</h3>
+                <p class="text-green-500 font-bold text-xl sm:text-2xl">High</p>
+            </div>
+            <div class="w-px bg-gray-200 h-12 hidden sm:block"></div>
+            <div class="text-center">
+                <h3 class="font-medium text-gray-900 text-sm sm:text-base">Completeness</h3>
+                <p class="text-primary font-bold text-xl sm:text-2xl">Good</p>
+            </div>
+        </div>
+
+        <!-- Template Selection -->
+        <div class="bg-white p-4 rounded-lg shadow-sm mb-6">
+          <h2 class="text-lg font-medium text-gray-900 mb-4">
+            Choose a Template
+          </h2>
+          <div
+            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
+          >
+            <div class="template-option cursor-pointer group">
+              <div
+                class="template-preview bg-white border-2 border-primary rounded-md shadow-sm transition-all duration-300 overflow-hidden"
+              >
+                <img
+                  src="https://readdy.ai/api/search-image?query=minimalist%20professional%20resume%20template%20with%20clean%20layout%2C%20white%20background%2C%20blue%20accents%2C%20modern%20typography%2C%20professional%20design%2C%20high%20quality&width=200&height=280&seq=template1&orientation=portrait"
+                  alt="Modern Template"
+                  class="w-full h-auto object-cover"
+                />
+              </div>
+              <p class="text-xs text-center mt-2 font-medium text-primary">
+                Modern
+              </p>
+            </div>
+            <div class="template-option cursor-pointer group">
+              <div
+                class="template-preview bg-white border border-gray-200 rounded-md shadow-sm transition-all duration-300 overflow-hidden"
+              >
+                <img
+                  src="https://readdy.ai/api/search-image?query=classic%20professional%20resume%20template%20with%20traditional%20layout%2C%20white%20background%2C%20conservative%20design%2C%20serif%20typography%2C%20professional%20design%2C%20high%20quality&width=200&height=280&seq=template2&orientation=portrait"
+                  alt="Classic Template"
+                  class="w-full h-auto object-cover"
+                />
+              </div>
+              <p class="text-xs text-center mt-2 font-medium text-gray-500">
+                Classic
+              </p>
+            </div>
+            <div class="template-option cursor-pointer group">
+              <div
+                class="template-preview bg-white border border-gray-200 rounded-md shadow-sm transition-all duration-300 overflow-hidden"
+              >
+                <img
+                  src="https://readdy.ai/api/search-image?query=creative%20professional%20resume%20template%20with%20unique%20layout%2C%20white%20background%2C%20colorful%20accents%2C%20modern%20typography%2C%20professional%20design%2C%20high%20quality&width=200&height=280&seq=template3&orientation=portrait"
+                  alt="Creative Template"
+                  class="w-full h-auto object-cover"
+                />
+              </div>
+              <p class="text-xs text-center mt-2 font-medium text-gray-500">
+                Creative
+              </p>
+            </div>
+            <div class="template-option cursor-pointer group">
+              <div
+                class="template-preview bg-white border border-gray-200 rounded-md shadow-sm transition-all duration-300 overflow-hidden"
+              >
+                <img
+                  src="https://readdy.ai/api/search-image?query=executive%20professional%20resume%20template%20with%20sophisticated%20layout%2C%20white%20background%2C%20dark%20accents%2C%20elegant%20typography%2C%20professional%20design%2C%20high%20quality&width=200&height=280&seq=template4&orientation=portrait"
+                  alt="Executive Template"
+                  class="w-full h-auto object-cover"
+                />
+              </div>
+              <p class="text-xs text-center mt-2 font-medium text-gray-500">
+                Executive
+              </p>
+            </div>
+            <div class="template-option cursor-pointer group">
+              <div
+                class="template-preview bg-white border border-gray-200 rounded-md shadow-sm transition-all duration-300 overflow-hidden"
+              >
+                <img
+                  src="https://readdy.ai/api/search-image?query=technical%20professional%20resume%20template%20for%20IT%20professionals%2C%20white%20background%2C%20structured%20layout%2C%20modern%20typography%2C%20professional%20design%2C%20high%20quality&width=200&height=280&seq=template5&orientation=portrait"
+                  alt="Technical Template"
+                  class="w-full h-auto object-cover"
+                />
+              </div>
+              <p class="text-xs text-center mt-2 font-medium text-gray-500">
+                Technical
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ATS Settings -->
+        <div class="bg-white p-4 rounded-lg shadow-sm mb-6">
+          <div class="flex justify-between items-center">
+            <div>
+              <h2 class="text-lg font-medium text-gray-900">
+                ATS Optimization
+              </h2>
+              <p class="text-sm text-gray-500">
+                Ensure your resume passes through Applicant Tracking Systems
+              </p>
+            </div>
+            <label class="custom-switch">
+              <input type="checkbox" checked />
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resume Content -->
+      <div class="flex flex-col lg:flex-row gap-6">
+        <!-- Left Column - Personal Info -->
+        <div class="lg:w-1/3">
+          <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+            <div class="flex flex-col items-center mb-6">
+              <div class="relative group mb-4">
+                <div
+                  class="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-md"
+                >
+                  <img
+                    src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20young%20businessman%20with%20short%20brown%20hair%20wearing%20a%20blue%20suit%2C%20high%20quality%2C%20professional%20photography%2C%20studio%20lighting%2C%20neutral%20background&width=300&height=300&seq=headshot1&orientation=squarish"
+                    alt="Professional Headshot"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <button
+                  class="absolute bottom-0 right-0 bg-white rounded-full p-2 shadow-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                >
+                  <div class="w-5 h-5 flex items-center justify-center">
+                    <i class="ri-camera-line"></i>
+                  </div>
+                </button>
+              </div>
+              <div class="text-center w-full">
+                <input
+                  type="text"
+                  value="Michael Anderson"
+                  class="text-xl font-bold text-gray-900 text-center w-full border-none focus:ring-2 focus:ring-primary focus:outline-none"
+                />
+                <input
+                  type="text"
+                  value="Senior Product Manager"
+                  class="text-sm text-gray-500 text-center w-full border-none focus:ring-2 focus:ring-primary focus:outline-none mt-1"
+                />
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Email</label
+                >
+                <div class="mt-1 relative rounded-md shadow-sm">
+                  <div
+                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                  >
+                    <div
+                      class="w-5 h-5 flex items-center justify-center text-gray-400"
+                    >
+                      <i class="ri-mail-line"></i>
+                    </div>
+                  </div>
+                  <input
+                    type="email"
+                    value="michael.anderson@example.com"
+                    class="focus:ring-primary focus:border-primary block w-full pl-10 sm:text-sm border-gray-300 rounded-md py-2 border"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Phone</label
+                >
+                <div class="mt-1 relative rounded-md shadow-sm">
+                  <div
+                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                  >
+                    <div
+                      class="w-5 h-5 flex items-center justify-center text-gray-400"
+                    >
+                      <i class="ri-phone-line"></i>
+                    </div>
+                  </div>
+                  <input
+                    type="tel"
+                    value="(415) 555-1234"
+                    class="focus:ring-primary focus:border-primary block w-full pl-10 sm:text-sm border-gray-300 rounded-md py-2 border"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Location</label
+                >
+                <div class="mt-1 relative rounded-md shadow-sm">
+                  <div
+                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                  >
+                    <div
+                      class="w-5 h-5 flex items-center justify-center text-gray-400"
+                    >
+                      <i class="ri-map-pin-line"></i>
+                    </div>
+                  </div>
+                  <input
+                    type="text"
+                    value="San Francisco, CA"
+                    class="focus:ring-primary focus:border-primary block w-full pl-10 sm:text-sm border-gray-300 rounded-md py-2 border"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Website</label
+                >
+                <div class="mt-1 relative rounded-md shadow-sm">
+                  <div
+                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                  >
+                    <div
+                      class="w-5 h-5 flex items-center justify-center text-gray-400"
+                    >
+                      <i class="ri-global-line"></i>
+                    </div>
+                  </div>
+                  <input
+                    type="url"
+                    value="www.michaelanderson.com"
+                    class="focus:ring-primary focus:border-primary block w-full pl-10 sm:text-sm border-gray-300 rounded-md py-2 border"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Links -->
+          <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+            <h2 class="text-lg font-medium text-gray-900 mb-4">
+              Social Profiles
+            </h2>
+            <div class="space-y-4">
+              <div class="flex items-center">
+                <div
+                  class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 mr-3"
+                >
+                  <i class="ri-linkedin-fill"></i>
+                </div>
+                <input
+                  type="text"
+                  value="linkedin.com/in/michaelanderson"
+                  class="flex-1 focus:ring-primary focus:border-primary block w-full sm:text-sm border-gray-300 rounded-md py-2 border"
+                />
+              </div>
+
+              <div class="flex items-center">
+                <div
+                  class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 mr-3"
+                >
+                  <i class="ri-github-fill"></i>
+                </div>
+                <input
+                  type="text"
+                  value="github.com/michaelanderson"
+                  class="flex-1 focus:ring-primary focus:border-primary block w-full sm:text-sm border-gray-300 rounded-md py-2 border"
+                />
+              </div>
+
+              <div class="flex items-center">
+                <div
+                  class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 text-blue-400 mr-3"
+                >
+                  <i class="ri-twitter-fill"></i>
+                </div>
+                <input
+                  type="text"
+                  value="twitter.com/michaelanderson"
+                  class="flex-1 focus:ring-primary focus:border-primary block w-full sm:text-sm border-gray-300 rounded-md py-2 border"
+                />
+              </div>
+
+              <button
+                type="button"
+                class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium !rounded-button text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary whitespace-nowrap"
+              >
+                <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                  <i class="ri-add-line"></i>
+                </div>
+                Add Social Profile
+              </button>
+            </div>
+          </div>
+
+          <!-- Professional Summary -->
+          <div class="bg-white rounded-lg shadow-sm p-6">
+            <h2 class="text-lg font-medium text-gray-900 mb-4">
+              Professional Summary
+            </h2>
+            <textarea
+              rows="6"
+              class="focus:ring-primary focus:border-primary block w-full sm:text-sm border-gray-300 rounded-md resize-none"
+            >
+Product leader with over 8 years of experience driving innovation and growth for technology companies. Passionate about creating user-centered solutions that solve real problems. Proven track record of launching successful products that exceed revenue targets and delight customers.</textarea
+            >
+          </div>
+        </div>
+
+        <!-- Right Column - Resume Sections -->
+        <div class="lg:w-2/3">
+          <!-- Work Experience Section -->
+          <div class="bg-white rounded-lg shadow-sm p-6 mb-6 resume-section">
+            <div class="flex justify-between items-center mb-4">
+              <div class="flex items-center">
+                <div
+                  class="drag-handle w-6 h-6 flex items-center justify-center text-gray-400 mr-2"
+                >
+                  <i class="ri-drag-move-line"></i>
+                </div>
+                <h2 class="text-lg font-medium text-gray-900">
+                  Work Experience
+                </h2>
+              </div>
+              <div
+                class="section-controls opacity-0 transition-opacity duration-200"
+              >
+                <button type="button" class="text-gray-400 hover:text-gray-500">
+                  <div class="w-6 h-6 flex items-center justify-center">
+                    <i class="ri-settings-line"></i>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Experience Item 1 -->
+            <div
+              class="border border-gray-200 rounded-lg p-4 mb-4 hover:shadow-sm transition-shadow duration-200"
+            >
+              <div class="flex justify-between">
+                <div>
+                  <div class="flex items-center">
+                    <h3 class="text-base font-medium text-gray-900">
+                      Senior Product Manager
+                    </h3>
+                    <span
+                      class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800"
+                      >Current</span
+                    >
+                  </div>
+                  <p class="text-sm text-gray-500">TechNova Solutions</p>
+                </div>
+                <div class="flex space-x-2">
+                  <button
+                    type="button"
+                    class="text-gray-400 hover:text-gray-500"
+                  >
+                    <div class="w-5 h-5 flex items-center justify-center">
+                      <i class="ri-edit-line"></i>
+                    </div>
+                  </button>
+                  <button
+                    type="button"
+                    class="text-gray-400 hover:text-gray-500"
+                  >
+                    <div class="w-5 h-5 flex items-center justify-center">
+                      <i class="ri-delete-bin-line"></i>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <div class="mt-2 flex items-center text-sm text-gray-500">
+                <div class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-calendar-line"></i>
+                </div>
+                <span>Jan 2021 - Present</span>
+                <span class="mx-2">•</span>
+                <div class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-map-pin-line"></i>
+                </div>
+                <span>San Francisco, CA</span>
+              </div>
+              <div class="mt-3">
+                <ul class="text-sm text-gray-600 space-y-2">
+                  <li class="flex items-start">
+                    <span class="text-gray-400 mr-2">•</span>
+                    <span
+                      >Led cross-functional teams to launch 3 major product
+                      initiatives that increased user engagement by 45% and
+                      revenue by $2.5M</span
+                    >
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-gray-400 mr-2">•</span>
+                    <span
+                      >Developed comprehensive product roadmaps and strategic
+                      vision aligned with company goals</span
+                    >
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-gray-400 mr-2">•</span>
+                    <span
+                      >Conducted user research and competitive analysis to
+                      identify market opportunities</span
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Experience Item 2 -->
+            <div
+              class="border border-gray-200 rounded-lg p-4 mb-4 hover:shadow-sm transition-shadow duration-200"
+            >
+              <div class="flex justify-between">
+                <div>
+                  <h3 class="text-base font-medium text-gray-900">
+                    Product Manager
+                  </h3>
+                  <p class="text-sm text-gray-500">InnovateTech Inc.</p>
+                </div>
+                <div class="flex space-x-2">
+                  <button
+                    type="button"
+                    class="text-gray-400 hover:text-gray-500"
+                  >
+                    <div class="w-5 h-5 flex items-center justify-center">
+                      <i class="ri-edit-line"></i>
+                    </div>
+                  </button>
+                  <button
+                    type="button"
+                    class="text-gray-400 hover:text-gray-500"
+                  >
+                    <div class="w-5 h-5 flex items-center justify-center">
+                      <i class="ri-delete-bin-line"></i>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <div class="mt-2 flex items-center text-sm text-gray-500">
+                <div class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-calendar-line"></i>
+                </div>
+                <span>Mar 2018 - Dec 2020</span>
+                <span class="mx-2">•</span>
+                <div class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-map-pin-line"></i>
+                </div>
+                <span>Boston, MA</span>
+              </div>
+              <div class="mt-3">
+                <ul class="text-sm text-gray-600 space-y-2">
+                  <li class="flex items-start">
+                    <span class="text-gray-400 mr-2">•</span>
+                    <span
+                      >Managed the development and launch of a mobile app that
+                      acquired 100,000+ users in the first quarter</span
+                    >
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-gray-400 mr-2">•</span>
+                    <span
+                      >Collaborated with engineering teams to define technical
+                      requirements and prioritize features</span
+                    >
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-gray-400 mr-2">•</span>
+                    <span
+                      >Created and maintained product documentation, user
+                      stories, and acceptance criteria</span
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium !rounded-button text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary whitespace-nowrap"
+            >
+              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                <i class="ri-add-line"></i>
+              </div>
+              Add Work Experience
+            </button>
+          </div>
+
+          <!-- Education Section -->
+          <div class="bg-white rounded-lg shadow-sm p-6 mb-6 resume-section">
+            <div class="flex justify-between items-center mb-4">
+              <div class="flex items-center">
+                <div
+                  class="drag-handle w-6 h-6 flex items-center justify-center text-gray-400 mr-2"
+                >
+                  <i class="ri-drag-move-line"></i>
+                </div>
+                <h2 class="text-lg font-medium text-gray-900">Education</h2>
+              </div>
+              <div
+                class="section-controls opacity-0 transition-opacity duration-200"
+              >
+                <button type="button" class="text-gray-400 hover:text-gray-500">
+                  <div class="w-6 h-6 flex items-center justify-center">
+                    <i class="ri-settings-line"></i>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Education Item 1 -->
+            <div
+              class="border border-gray-200 rounded-lg p-4 mb-4 hover:shadow-sm transition-shadow duration-200"
+            >
+              <div class="flex justify-between">
+                <div>
+                  <h3 class="text-base font-medium text-gray-900">
+                    Master of Business Administration (MBA)
+                  </h3>
+                  <p class="text-sm text-gray-500">Harvard Business School</p>
+                </div>
+                <div class="flex space-x-2">
+                  <button
+                    type="button"
+                    class="text-gray-400 hover:text-gray-500"
+                  >
+                    <div class="w-5 h-5 flex items-center justify-center">
+                      <i class="ri-edit-line"></i>
+                    </div>
+                  </button>
+                  <button
+                    type="button"
+                    class="text-gray-400 hover:text-gray-500"
+                  >
+                    <div class="w-5 h-5 flex items-center justify-center">
+                      <i class="ri-delete-bin-line"></i>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <div class="mt-2 flex items-center text-sm text-gray-500">
+                <div class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-calendar-line"></i>
+                </div>
+                <span>2016 - 2018</span>
+                <span class="mx-2">•</span>
+                <div class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-map-pin-line"></i>
+                </div>
+                <span>Cambridge, MA</span>
+              </div>
+              <div class="mt-3 text-sm text-gray-600">
+                <p>
+                  Concentration in Technology Management and Entrepreneurship
+                </p>
+                <p class="mt-1">GPA: 3.9/4.0</p>
+              </div>
+            </div>
+
+            <!-- Education Item 2 -->
+            <div
+              class="border border-gray-200 rounded-lg p-4 mb-4 hover:shadow-sm transition-shadow duration-200"
+            >
+              <div class="flex justify-between">
+                <div>
+                  <h3 class="text-base font-medium text-gray-900">
+                    Bachelor of Science in Computer Science
+                  </h3>
+                  <p class="text-sm text-gray-500">Stanford University</p>
+                </div>
+                <div class="flex space-x-2">
+                  <button
+                    type="button"
+                    class="text-gray-400 hover:text-gray-500"
+                  >
+                    <div class="w-5 h-5 flex items-center justify-center">
+                      <i class="ri-edit-line"></i>
+                    </div>
+                  </button>
+                  <button
+                    type="button"
+                    class="text-gray-400 hover:text-gray-500"
+                  >
+                    <div class="w-5 h-5 flex items-center justify-center">
+                      <i class="ri-delete-bin-line"></i>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <div class="mt-2 flex items-center text-sm text-gray-500">
+                <div class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-calendar-line"></i>
+                </div>
+                <span>2012 - 2016</span>
+                <span class="mx-2">•</span>
+                <div class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-map-pin-line"></i>
+                </div>
+                <span>Stanford, CA</span>
+              </div>
+              <div class="mt-3 text-sm text-gray-600">
+                <p>Minor in Business Administration</p>
+                <p class="mt-1">GPA: 3.8/4.0</p>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium !rounded-button text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary whitespace-nowrap"
+            >
+              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                <i class="ri-add-line"></i>
+              </div>
+              Add Education
+            </button>
+          </div>
+
+          <!-- Skills Section -->
+          <div class="bg-white rounded-lg shadow-sm p-6 mb-6 resume-section">
+            <div class="flex justify-between items-center mb-4">
+              <div class="flex items-center">
+                <div
+                  class="drag-handle w-6 h-6 flex items-center justify-center text-gray-400 mr-2"
+                >
+                  <i class="ri-drag-move-line"></i>
+                </div>
+                <h2 class="text-lg font-medium text-gray-900">Skills</h2>
+              </div>
+              <div
+                class="section-controls opacity-0 transition-opacity duration-200"
+              >
+                <button type="button" class="text-gray-400 hover:text-gray-500">
+                  <div class="w-6 h-6 flex items-center justify-center">
+                    <i class="ri-settings-line"></i>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 mb-4">
+              <!-- Skill Item 1 -->
+              <div>
+                <div class="flex justify-between items-center mb-1">
+                  <h3 class="text-sm font-medium text-gray-900">Product Management</h3>
+                  <div class="flex items-center space-x-2">
+                    <span class="text-xs font-medium text-gray-500">Expert</span>
+                    <button type="button" class="text-gray-400 hover:text-primary"><i class="ri-edit-line"></i></button>
+                    <button type="button" class="text-gray-400 hover:text-red-500"><i class="ri-delete-bin-line"></i></button>
+                  </div>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-1.5">
+                  <div class="bg-primary h-1.5 rounded-full" style="width: 100%"></div>
+                </div>
+              </div>
+
+              <!-- Skill Item 2 -->
+              <div>
+                <div class="flex justify-between items-center mb-1">
+                  <h3 class="text-sm font-medium text-gray-900">User Experience (UX)</h3>
+                  <div class="flex items-center space-x-2">
+                    <span class="text-xs font-medium text-gray-500">Advanced</span>
+                    <button type="button" class="text-gray-400 hover:text-primary"><i class="ri-edit-line"></i></button>
+                    <button type="button" class="text-gray-400 hover:text-red-500"><i class="ri-delete-bin-line"></i></button>
+                  </div>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-1.5">
+                  <div class="bg-primary h-1.5 rounded-full" style="width: 80%"></div>
+                </div>
+              </div>
+
+              <!-- Skill Item 3 -->
+              <div>
+                <div class="flex justify-between items-center mb-1">
+                  <h3 class="text-sm font-medium text-gray-900">Data Analysis</h3>
+                  <div class="flex items-center space-x-2">
+                    <span class="text-xs font-medium text-gray-500">Advanced</span>
+                    <button type="button" class="text-gray-400 hover:text-primary"><i class="ri-edit-line"></i></button>
+                    <button type="button" class="text-gray-400 hover:text-red-500"><i class="ri-delete-bin-line"></i></button>
+                  </div>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-1.5">
+                  <div class="bg-primary h-1.5 rounded-full" style="width: 80%"></div>
+                </div>
+              </div>
+
+              <!-- Skill Item 4 -->
+              <div>
+                <div class="flex justify-between items-center mb-1">
+                  <h3 class="text-sm font-medium text-gray-900">Agile Methodologies</h3>
+                   <div class="flex items-center space-x-2">
+                    <span class="text-xs font-medium text-gray-500">Expert</span>
+                    <button type="button" class="text-gray-400 hover:text-primary"><i class="ri-edit-line"></i></button>
+                    <button type="button" class="text-gray-400 hover:text-red-500"><i class="ri-delete-bin-line"></i></button>
+                  </div>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-1.5">
+                  <div class="bg-primary h-1.5 rounded-full" style="width: 100%"></div>
+                </div>
+              </div>
+
+              <!-- Skill Item 5 -->
+              <div>
+                <div class="flex justify-between items-center mb-1">
+                  <h3 class="text-sm font-medium text-gray-900">Strategic Planning</h3>
+                   <div class="flex items-center space-x-2">
+                    <span class="text-xs font-medium text-gray-500">Advanced</span>
+                    <button type="button" class="text-gray-400 hover:text-primary"><i class="ri-edit-line"></i></button>
+                    <button type="button" class="text-gray-400 hover:text-red-500"><i class="ri-delete-bin-line"></i></button>
+                  </div>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-1.5">
+                  <div class="bg-primary h-1.5 rounded-full" style="width: 80%"></div>
+                </div>
+              </div>
+
+              <!-- Skill Item 6 -->
+              <div>
+                <div class="flex justify-between items-center mb-1">
+                  <h3 class="text-sm font-medium text-gray-900">Market Research</h3>
+                   <div class="flex items-center space-x-2">
+                    <span class="text-xs font-medium text-gray-500">Intermediate</span>
+                    <button type="button" class="text-gray-400 hover:text-primary"><i class="ri-edit-line"></i></button>
+                    <button type="button" class="text-gray-400 hover:text-red-500"><i class="ri-delete-bin-line"></i></button>
+                  </div>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-1.5">
+                  <div class="bg-primary h-1.5 rounded-full" style="width: 60%"></div>
+                </div>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium !rounded-button text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary whitespace-nowrap"
+            >
+              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                <i class="ri-add-line"></i>
+              </div>
+              Add Skill
+            </button>
+          </div>
+
+          <!-- Certifications Section -->
+          <div class="bg-white rounded-lg shadow-sm p-6 resume-section">
+            <div class="flex justify-between items-center mb-4">
+              <div class="flex items-center">
+                <div
+                  class="drag-handle w-6 h-6 flex items-center justify-center text-gray-400 mr-2"
+                >
+                  <i class="ri-drag-move-line"></i>
+                </div>
+                <h2 class="text-lg font-medium text-gray-900">
+                  Certifications
+                </h2>
+              </div>
+              <div
+                class="section-controls opacity-0 transition-opacity duration-200"
+              >
+                <button type="button" class="text-gray-400 hover:text-gray-500">
+                  <div class="w-6 h-6 flex items-center justify-center">
+                    <i class="ri-settings-line"></i>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Certification Item 1 -->
+            <div
+              class="border border-gray-200 rounded-lg p-4 mb-4 hover:shadow-sm transition-shadow duration-200"
+            >
+              <div class="flex justify-between">
+                <div>
+                  <h3 class="text-base font-medium text-gray-900">
+                    Certified Scrum Product Owner (CSPO)
+                  </h3>
+                  <p class="text-sm text-gray-500">Scrum Alliance</p>
+                </div>
+                <div class="flex space-x-2">
+                  <button
+                    type="button"
+                    class="text-gray-400 hover:text-gray-500"
+                  >
+                    <div class="w-5 h-5 flex items-center justify-center">
+                      <i class="ri-edit-line"></i>
+                    </div>
+                  </button>
+                  <button
+                    type="button"
+                    class="text-gray-400 hover:text-gray-500"
+                  >
+                    <div class="w-5 h-5 flex items-center justify-center">
+                      <i class="ri-delete-bin-line"></i>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <div class="mt-2 flex items-center text-sm text-gray-500">
+                <div class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-calendar-line"></i>
+                </div>
+                <span>Issued: May 2019</span>
+                <span class="mx-2">•</span>
+                <div class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-time-line"></i>
+                </div>
+                <span>Expires: May 2023</span>
+              </div>
+            </div>
+
+            <!-- Certification Item 2 -->
+            <div
+              class="border border-gray-200 rounded-lg p-4 mb-4 hover:shadow-sm transition-shadow duration-200"
+            >
+              <div class="flex justify-between">
+                <div>
+                  <h3 class="text-base font-medium text-gray-900">
+                    Product Management Certification
+                  </h3>
+                  <p class="text-sm text-gray-500">Product School</p>
+                </div>
+                <div class="flex space-x-2">
+                  <button
+                    type="button"
+                    class="text-gray-400 hover:text-gray-500"
+                  >
+                    <div class="w-5 h-5 flex items-center justify-center">
+                      <i class="ri-edit-line"></i>
+                    </div>
+                  </button>
+                  <button
+                    type="button"
+                    class="text-gray-400 hover:text-gray-500"
+                  >
+                    <div class="w-5 h-5 flex items-center justify-center">
+                      <i class="ri-delete-bin-line"></i>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <div class="mt-2 flex items-center text-sm text-gray-500">
+                <div class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-calendar-line"></i>
+                </div>
+                <span>Issued: November 2020</span>
+                <span class="mx-2">•</span>
+                <div class="w-4 h-4 flex items-center justify-center mr-1">
+                  <i class="ri-medal-line"></i>
+                </div>
+                <span>No Expiration</span>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium !rounded-button text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary whitespace-nowrap"
+            >
+              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                <i class="ri-add-line"></i>
+              </div>
+              Add Certification
+            </button>
+          </div>
+
+          <!-- Add Section Button -->
+          <div class="mt-6 text-center">
+            <button
+              type="button"
+              class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium !rounded-button text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary whitespace-nowrap"
+            >
+              <div class="w-5 h-5 mr-2 flex items-center justify-center">
+                <i class="ri-add-line"></i>
+              </div>
+              Add New Section
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script id="mobileMenuToggle">
+      document.addEventListener("DOMContentLoaded", function () {
+        const mobileMenuButton = document.querySelector('[aria-expanded="false"]');
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        if (mobileMenuButton && mobileMenu) {
+          mobileMenuButton.addEventListener("click", function () {
+            const expanded = this.getAttribute("aria-expanded") === "true";
+            this.setAttribute("aria-expanded", !expanded);
+            mobileMenu.classList.toggle("hidden");
+          });
+        }
+      });
+    </script>
+
+    <script id="dragAndDropFunctionality">
+      document.addEventListener("DOMContentLoaded", function () {
+        const dragHandles = document.querySelectorAll(".drag-handle");
+
+        dragHandles.forEach((handle) => {
+          handle.addEventListener("mousedown", function (e) {
+            const section = this.closest(".resume-section");
+            section.classList.add("cursor-grabbing");
+
+            // Add drag functionality here
+            // This is a placeholder for actual drag and drop implementation
+          });
+
+          handle.addEventListener("mouseup", function () {
+            const section = this.closest(".resume-section");
+            section.classList.remove("cursor-grabbing");
+          });
+        });
+      });
+    </script>
+
+    <script id="templateSelection">
+      document.addEventListener("DOMContentLoaded", function () {
+        const templateOptions = document.querySelectorAll(".template-option");
+
+        templateOptions.forEach((option) => {
+          option.addEventListener("click", function () {
+            // Remove selected class from all options
+            templateOptions.forEach((opt) => {
+              opt
+                .querySelector(".template-preview")
+                .classList.remove("border-primary", "border-2");
+              opt.querySelector("p").classList.remove("text-primary");
+              opt.querySelector("p").classList.add("text-gray-500");
+            });
+
+            // Add selected class to clicked option
+            this.querySelector(".template-preview").classList.add(
+              "border-primary",
+              "border-2",
+            );
+            this.querySelector("p").classList.add("text-primary");
+            this.querySelector("p").classList.remove("text-gray-500");
+          });
+        });
+      });
+    </script>
+
+    <script id="switchToggleHandlers">
+      document.addEventListener("DOMContentLoaded", function () {
+        const switches = document.querySelectorAll(".custom-switch input");
+
+        switches.forEach((switchInput) => {
+          switchInput.addEventListener("change", function () {
+            // Handle switch toggle
+            console.log("Switch toggled:", this.checked);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mock Interview Session - Custom CSS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <style>
+      :root {
+        --primary-color: #6366f1;
+        --secondary-color: #f97316;
+        --text-dark: #1f2937;
+        --text-medium: #4b5563;
+        --text-light: #6b7280;
+        --bg-light: #f8f9fa;
+        --bg-white: #ffffff;
+        --border-color: #e5e7eb;
+        --font-family-sans: "Inter", sans-serif;
+        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        --border-radius: 8px;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: var(--font-family-sans);
+        background-color: var(--bg-light);
+        color: var(--text-medium);
+        line-height: 1.5;
+      }
+      .page-container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+      /* Header */
+      .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1.5rem;
+        background-color: var(--bg-white);
+        border-bottom: 1px solid var(--border-color);
+        box-shadow: var(--shadow-sm);
+      }
+      .back-link {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: var(--text-medium);
+        font-weight: 500;
+        transition: color 0.2s ease;
+      }
+      .back-link:hover {
+        color: var(--primary-color);
+      }
+      .back-link i {
+        margin-right: 0.5rem;
+      }
+      .interview-stats {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .stat-item {
+        display: flex;
+        align-items: center;
+        font-size: 0.9rem;
+      }
+      .stat-item i {
+        margin-right: 0.5rem;
+        color: var(--text-light);
+      }
+      .stat-item span {
+        font-weight: 500;
+        color: var(--text-dark);
+      }
+      /* Progress Bar */
+      .progress-container {
+        padding: 4px 0;
+        background-color: #e9ecef;
+      }
+      .progress-bar {
+        width: 30%;
+        height: 6px;
+        background-color: var(--primary-color);
+        border-radius: 0 3px 3px 0;
+        transition: width 0.5s ease-in-out;
+      }
+      /* Main Content */
+      .main-content {
+        flex: 1;
+        overflow-y: auto;
+        padding: 1.5rem;
+      }
+      .chat-area {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      /* Chat Messages */
+      .chat-message {
+        display: flex;
+        margin-bottom: 2rem;
+        animation: pop-in 0.4s ease-out forwards;
+      }
+      .chat-message.user {
+        justify-content: flex-end;
+      }
+      .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .ai-avatar {
+        background-color: var(--primary-color);
+        color: white;
+        margin-right: 1rem;
+      }
+      .user-avatar {
+        background-color: var(--border-color);
+        color: var(--text-light);
+        margin-left: 1rem;
+      }
+      .chat-bubble {
+        padding: 1rem;
+        border-radius: var(--border-radius);
+        position: relative;
+        max-width: 90%;
+      }
+      .ai-bubble {
+        background-color: #f1f3f5;
+        border-top-left-radius: 0;
+      }
+      .user-bubble {
+        background-color: var(--bg-white);
+        border: 1px solid var(--border-color);
+        border-top-right-radius: 0;
+      }
+      .message-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.5rem;
+      }
+      .author {
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: var(--primary-color);
+      }
+      .user .author {
+        color: var(--text-dark);
+      }
+      .tag {
+        font-size: 0.75rem;
+        color: var(--text-light);
+      }
+      .message-content {
+        color: var(--text-dark);
+      }
+      /* Response Area */
+      .response-area {
+        padding: 1rem 1.5rem;
+        border-top: 1px solid var(--border-color);
+        background-color: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+      }
+      .response-content {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .media-previews {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+      .media-preview {
+        flex: 1;
+        background-color: #f1f3f5;
+        border-radius: var(--border-radius);
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--border-color);
+      }
+      .audio-preview {
+        flex: 2;
+        align-items: stretch;
+        justify-content: space-between;
+      }
+      .video-preview i {
+        font-size: 2rem;
+        color: var(--text-light);
+        margin-bottom: 0.5rem;
+      }
+      .audio-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+      .audio-wave {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        gap: 3px;
+      }
+      .audio-wave span {
+        width: 4px;
+        background-color: #ced4da;
+        border-radius: 3px;
+        transition: height 0.3s ease;
+      }
+      .audio-controls button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-medium);
+        transition: background-color 0.2s;
+      }
+      .audio-controls button:hover {
+        background-color: #e9ecef;
+      }
+      .audio-controls button.active {
+        background-color: var(--primary-color);
+        color: white;
+      }
+      /* Buttons */
+      .button {
+        padding: 0.5rem 1rem;
+        border-radius: var(--border-radius);
+        border: 1px solid transparent;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .button-primary {
+        background-color: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+      }
+      .button-primary:hover {
+        background-color: #4f46e5;
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+      }
+      .button-secondary {
+        background-color: var(--bg-white);
+        color: var(--text-medium);
+        border-color: var(--border-color);
+      }
+      .button-secondary:hover {
+        border-color: #adb5bd;
+        background-color: #f8f9fa;
+      }
+    
+      .actions-toolbar {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.75rem;
+        margin-top: 1rem;
+      }
+      
+      @keyframes pop-in {
+        from {
+          opacity: 0;
+          transform: translateY(10px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-container">
+      <header class="page-header">
+        <a href="interview.html" class="back-link">
+          <i class="ri-arrow-left-line ri-lg"></i>
+          <span>Back to Interview Practice</span>
+        </a>
+        <div class="interview-stats">
+          <div class="stat-item">
+            <span>Question: <strong>3/10</strong></span>
+          </div>
+          <div class="stat-item">
+            <i class="ri-time-line ri-lg"></i>
+            <span id="timer">12:45</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="progress-container">
+        <div class="progress-bar" style="width: 30%"></div>
+      </div>
+
+      <main class="main-content">
+        <div class="chat-area">
+          <div class="chat-message ai">
+            <div class="avatar ai-avatar">
+              <i class="ri-robot-2-line"></i>
+            </div>
+            <div class="chat-bubble ai-bubble">
+              <div class="message-header">
+                <span class="author">AI Interviewer</span>
+                <span class="tag">Behavioral Question</span>
+              </div>
+              <p class="message-content">
+                Tell me about a time when you had to deal with a difficult team
+                member. How did you handle the situation, and what was the
+                outcome?
+              </p>
+            </div>
+          </div>
+
+          <div class="chat-message user">
+            <div class="chat-bubble user-bubble">
+              <div class="message-header">
+                <span class="author">You</span>
+                <span class="tag">2 minutes ago</span>
+              </div>
+              <p class="message-content">
+                In my previous role as a project manager, I had a team member
+                who consistently missed deadlines and was often defensive when
+                receiving feedback. I decided to approach the situation by
+                first having a private one-on-one conversation to understand if
+                there were any underlying issues affecting their performance.
+              </p>
+            </div>
+            <div class="avatar user-avatar">
+              <i class="ri-user-line"></i>
+            </div>
+          </div>
+
+          <div class="chat-message ai">
+            <div class="avatar ai-avatar">
+              <i class="ri-robot-2-line"></i>
+            </div>
+            <div class="chat-bubble ai-bubble">
+              <div class="message-header">
+                <span class="author">AI Interviewer</span>
+                <span class="tag">Follow-up Question</span>
+              </div>
+              <p class="message-content">
+                That's a good start. Could you elaborate on what you discovered
+                during that conversation and what specific actions you took
+                afterward to address the situation?
+              </p>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="response-area">
+        <div class="response-content">
+          <div class="media-previews">
+            <div class="media-preview video-preview">
+              <i class="ri-video-line"></i>
+              <button class="button button-secondary">Enable Video</button>
+            </div>
+            <div class="media-preview audio-preview">
+              <div class="audio-header">
+                <span class="tag">Audio Input</span>
+                <div class="audio-controls">
+                  <button><i class="ri-volume-up-line"></i></button>
+                  <button class="active"><i class="ri-mic-line"></i></button>
+                </div>
+              </div>
+              <div class="is-speaking">
+                <div class="audio-wave">
+                  <span></span><span></span><span></span><span></span><span></span>
+                  <span></span><span></span><span></span><span></span><span></span>
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="actions-toolbar">
+            <button class="button button-secondary">
+              <i class="ri-flag-line"></i>
+              Flag for Review
+            </button>
+            <button class="button button-primary">
+              Submit Answer
+              <i class="ri-arrow-right-line"></i>
+            </button>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
