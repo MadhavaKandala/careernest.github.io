@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interview Practice Session</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#4F46E5", secondary: "#818CF8" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body {
+          font-family: 'Inter', sans-serif;
+          background-color: #f9fafb;
+      }
+      .editor-container {
+          min-height: 200px;
+          border: 1px solid #e5e7eb;
+          border-radius: 8px;
+          padding: 12px;
+          background-color: white;
+      }
+      .editor-toolbar {
+          border-bottom: 1px solid #e5e7eb;
+          padding-bottom: 8px;
+          margin-bottom: 8px;
+      }
+      .editor-toolbar button {
+          background: none;
+          border: none;
+          padding: 4px 8px;
+          margin-right: 4px;
+          border-radius: 4px;
+          cursor: pointer;
+      }
+      .editor-toolbar button:hover {
+          background-color: #f3f4f6;
+      }
+      .editor-content {
+          outline: none;
+          min-height: 150px;
+      }
+      .toggle-switch {
+          position: relative;
+          display: inline-block;
+          width: 60px;
+          height: 30px;
+      }
+      .toggle-switch input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+      }
+      .toggle-slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #e5e7eb;
+          transition: .4s;
+          border-radius: 30px;
+      }
+      .toggle-slider:before {
+          position: absolute;
+          content: "";
+          height: 22px;
+          width: 22px;
+          left: 4px;
+          bottom: 4px;
+          background-color: white;
+          transition: .4s;
+          border-radius: 50%;
+      }
+      input:checked + .toggle-slider {
+          background-color: #4F46E5;
+      }
+      input:checked + .toggle-slider:before {
+          transform: translateX(30px);
+      }
+      .custom-range {
+          -webkit-appearance: none;
+          width: 100%;
+          height: 6px;
+          border-radius: 5px;
+          background: #e5e7eb;
+          outline: none;
+      }
+      .custom-range::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          background: #4F46E5;
+          cursor: pointer;
+      }
+      .custom-range::-moz-range-thumb {
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          background: #4F46E5;
+          cursor: pointer;
+      }
+      .audio-visualizer {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 3px;
+          height: 40px;
+      }
+      .audio-bar {
+          width: 4px;
+          height: 100%;
+          background-color: #4F46E5;
+          border-radius: 2px;
+          animation: audio-wave 1.2s ease-in-out infinite;
+      }
+      @keyframes audio-wave {
+          0%, 100% {
+              height: 10px;
+          }
+          50% {
+              height: 30px;
+          }
+      }
+      .audio-bar:nth-child(1) { animation-delay: 0.0s; }
+      .audio-bar:nth-child(2) { animation-delay: 0.1s; }
+      .audio-bar:nth-child(3) { animation-delay: 0.2s; }
+      .audio-bar:nth-child(4) { animation-delay: 0.3s; }
+      .audio-bar:nth-child(5) { animation-delay: 0.4s; }
+      .audio-bar:nth-child(6) { animation-delay: 0.5s; }
+      .audio-bar:nth-child(7) { animation-delay: 0.6s; }
+    </style>
+  </head>
+  <body>
+    <div class="min-h-screen flex flex-col">
+      <!-- Header -->
+      <header class="bg-white border-b border-gray-200 sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between gap-4">
+          <a href="interview.html" class="flex items-center justify-center w-10 h-10 rounded-full bg-white shadow border border-gray-200 hover:bg-gray-50 transition" style="text-decoration: none;">
+            <i class="ri-arrow-left-line text-xl text-gray-500"></i>
+          </a>
+          <span class="logo-text" style="font-family: 'Pacifico', cursive; font-size: 1.5rem; font-weight: 700; background: linear-gradient(135deg, #6366f1 0%, #6d28d9 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; letter-spacing: 0.5px;">CareerNest</span>
+          <nav aria-label="Main Navigation">
+            <ul class="flex gap-2 bg-gray-100 p-1 rounded-full">
+              <li><a href="dashboard.html" class="px-4 py-2 text-sm font-medium text-gray-700 rounded-full hover:bg-white hover:text-primary transition-all">Dashboard</a></li>
+              <li><a href="jobs.html" class="px-4 py-2 text-sm font-medium text-gray-700 rounded-full hover:bg-white hover:text-primary transition-all">Jobs</a></li>
+              <li><a href="resume.html" class="px-4 py-2 text-sm font-medium text-gray-700 rounded-full hover:bg-white hover:text-primary transition-all">Resume</a></li>
+              <li><a href="interview.html" class="px-4 py-2 text-sm font-medium text-gray-700 rounded-full hover:bg-white hover:text-primary transition-all !bg-primary !text-white">Interview</a></li>
+              <li><a href="mastery.html" class="px-4 py-2 text-sm font-medium text-gray-700 rounded-full hover:bg-white hover:text-primary transition-all">Mastery</a></li>
+            </ul>
+          </nav>
+          <div class="w-10 h-10"></div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="flex-1 container mx-auto px-4 py-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Question and Response Section -->
+          <div class="lg:col-span-2">
+            <!-- Question Info -->
+            <div class="mb-6 flex flex-wrap items-center justify-between gap-4">
+              <div class="flex items-center gap-3">
+                <span
+                  class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full"
+                  >Behavioral</span
+                >
+                <div class="flex items-center">
+                  <span class="text-sm font-medium text-gray-600 mr-2"
+                    >Difficulty:</span
+                  >
+                  <div class="flex">
+                    <div class="w-4 h-4 rounded-full bg-primary mr-1"></div>
+                    <div class="w-4 h-4 rounded-full bg-primary mr-1"></div>
+                    <div class="w-4 h-4 rounded-full bg-gray-300"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-sm text-gray-600">
+                <span>Estimated time: 5 minutes</span>
+              </div>
+            </div>
+
+            <!-- Question Content -->
+            <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+              <h2 class="text-xl font-semibold mb-4">
+                Tell me about a time when you had to work with a difficult team
+                member. How did you handle the situation?
+              </h2>
+              <p class="text-gray-700 mb-4">
+                Describe a specific situation where you faced challenges working
+                with someone on your team. Explain the context, your approach to
+                resolving the issue, and the outcome.
+              </p>
+              <div class="bg-blue-50 p-4 rounded-lg">
+                <h3 class="font-medium text-blue-800 mb-2">
+                  Key points to consider:
+                </h3>
+                <ul class="list-disc pl-5 text-blue-800">
+                  <li>
+                    Focus on your actions and approach, not criticizing the
+                    other person
+                  </li>
+                  <li>Highlight communication strategies you employed</li>
+                  <li>Explain what you learned from the experience</li>
+                  <li>Describe the positive outcome or resolution</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Response Section -->
+            <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+              <div class="flex justify-between items-center mb-6">
+                <h3 class="text-lg font-semibold">Your Response</h3>
+                <div class="flex items-center">
+                  <span class="mr-3 text-sm font-medium text-gray-700">Text</span>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="responseToggle" disabled />
+                    <span class="toggle-slider"></span>
+                  </label>
+                  <span class="ml-3 text-sm font-medium text-gray-700">Voice</span>
+                </div>
+              </div>
+
+              <!-- Text Editor (Default) -->
+              <div id="textResponseSection" class="mb-4">
+                <div class="editor-container">
+                  <div class="editor-toolbar flex flex-wrap">
+                    <button
+                      type="button"
+                      data-command="bold"
+                      class="w-8 h-8 flex items-center justify-center"
+                    >
+                      <i class="ri-bold-line"></i>
+                    </button>
+                    <button
+                      type="button"
+                      data-command="italic"
+                      class="w-8 h-8 flex items-center justify-center"
+                    >
+                      <i class="ri-italic-line"></i>
+                    </button>
+                    <button
+                      type="button"
+                      data-command="underline"
+                      class="w-8 h-8 flex items-center justify-center"
+                    >
+                      <i class="ri-underline-line"></i>
+                    </button>
+                    <button
+                      type="button"
+                      data-command="insertOrderedList"
+                      class="w-8 h-8 flex items-center justify-center"
+                    >
+                      <i class="ri-list-ordered-line"></i>
+                    </button>
+                    <button
+                      type="button"
+                      data-command="insertUnorderedList"
+                      class="w-8 h-8 flex items-center justify-center"
+                    >
+                      <i class="ri-list-unordered-line"></i>
+                    </button>
+                  </div>
+                  <div
+                    class="editor-content"
+                    contenteditable="true"
+                    id="editor"
+                  >
+                    <p>
+                      During my time at Acme Technologies, I worked with a team
+                      member who consistently missed deadlines and was often
+                      defensive when receiving feedback. This created tension
+                      within our project team that was developing a new customer
+                      portal with a tight deadline.
+                    </p>
+                    <p>
+                      I decided to address the situation by first scheduling a
+                      private one-on-one meeting to understand their
+                      perspective. During our conversation, I learned they were
+                      struggling with some technical aspects of the project but
+                      were hesitant to ask for help. Rather than expressing
+                      frustration, I acknowledged their strengths and offered to
+                      pair-program on challenging tasks.
+                    </p>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center mt-3 text-sm text-gray-600">
+                  <div>
+                    <span id="wordCount">72</span> words |
+                    <span id="charCount">435</span> characters
+                  </div>
+                  <div class="flex items-center">
+                    <div class="w-4 h-4 flex items-center justify-center mr-1">
+                      <i class="ri-save-line"></i>
+                    </div>
+                    <span>Auto-saving...</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Voice Recorder (Hidden by default) -->
+              <div id="voiceResponseSection" class="hidden">
+                <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 flex flex-col items-center">
+                  <div class="mb-6 audio-visualizer">
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                    <div class="audio-bar"></div>
+                  </div>
+                  <div class="text-center mb-6">
+                    <div class="text-2xl font-bold mb-1" id="recordingTime">00:42</div>
+                    <p class="text-gray-600">Recording in progress</p>
+                  </div>
+                  <div class="flex gap-4">
+                    <button class="bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-button flex items-center whitespace-nowrap" disabled>
+                      <div class="w-5 h-5 flex items-center justify-center mr-1">
+                        <i class="ri-restart-line"></i>
+                      </div>
+                      Restart
+                    </button>
+                    <button class="bg-red-500 text-white font-medium py-2 px-4 rounded-button flex items-center whitespace-nowrap" disabled>
+                      <div class="w-5 h-5 flex items-center justify-center mr-1">
+                        <i class="ri-stop-circle-line"></i>
+                      </div>
+                      Stop Recording
+                    </button>
+                  </div>
+                </div>
+                <div class="mt-4">
+                  <p class="text-sm text-gray-600 mb-2">Adjust microphone sensitivity:</p>
+                  <input type="range" class="custom-range" min="0" max="100" value="75" disabled />
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap justify-between gap-4">
+              <div class="flex gap-3">
+                <button
+                  class="border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium py-2 px-4 rounded-button flex items-center whitespace-nowrap"
+                >
+                  <div class="w-5 h-5 flex items-center justify-center mr-1">
+                    <i class="ri-arrow-left-line"></i>
+                  </div>
+                  Previous
+                </button>
+                <button
+                  class="border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium py-2 px-4 rounded-button flex items-center whitespace-nowrap"
+                >
+                  <span>Next</span>
+                  <div class="w-5 h-5 flex items-center justify-center ml-1">
+                    <i class="ri-arrow-right-line"></i>
+                  </div>
+                </button>
+              </div>
+              <div class="flex gap-3">
+                <button
+                  class="border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium py-2 px-4 rounded-button whitespace-nowrap"
+                >
+                  Save Draft
+                </button>
+                <button
+                  class="bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded-button whitespace-nowrap"
+                >
+                  Submit Answer
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Guidelines and Progress Section -->
+          <div class="lg:col-span-1">
+            <!-- Progress Card -->
+            <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+              <h3 class="text-lg font-semibold mb-4">Session Progress</h3>
+              <div class="mb-4">
+                <div class="flex justify-between text-sm mb-1">
+                  <span>30% Complete</span>
+                  <span>3 of 10 questions</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div
+                    class="bg-primary h-2 rounded-full"
+                    style="width: 30%"
+                  ></div>
+                </div>
+              </div>
+              <div class="space-y-3">
+                <div class="flex justify-between items-center">
+                  <span class="text-sm">Time spent on this question</span>
+                  <span class="font-medium">5:28</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-sm">Average time per question</span>
+                  <span class="font-medium">6:12</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-sm">Total session time</span>
+                  <span class="font-medium">18:36</span>
+                </div>
+              </div>
+              <div class="mt-5 pt-5 border-t border-gray-200">
+                <button
+                  class="w-full bg-red-50 hover:bg-red-100 text-red-700 font-medium py-2 px-4 rounded-button flex items-center justify-center whitespace-nowrap"
+                >
+                  <div class="w-5 h-5 flex items-center justify-center mr-2">
+                    <i class="ri-close-circle-line"></i>
+                  </div>
+                  End Session
+                </button>
+              </div>
+            </div>
+
+            <!-- Answer Guidelines -->
+            <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-semibold">Answer Guidelines</h3>
+                <button class="text-gray-500 hover:text-gray-700">
+                  <div class="w-6 h-6 flex items-center justify-center">
+                    <i class="ri-information-line"></i>
+                  </div>
+                </button>
+              </div>
+              <div class="space-y-4">
+                <div class="p-3 bg-gray-50 rounded-lg">
+                  <h4 class="font-medium mb-2">
+                    Structure your answer with STAR
+                  </h4>
+                  <ul class="text-sm text-gray-700 space-y-1">
+                    <li>
+                      <span class="font-medium">Situation:</span> Set the
+                      context
+                    </li>
+                    <li>
+                      <span class="font-medium">Task:</span> Explain your
+                      responsibility
+                    </li>
+                    <li>
+                      <span class="font-medium">Action:</span> Describe what you
+                      did
+                    </li>
+                    <li>
+                      <span class="font-medium">Result:</span> Share the outcome
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-medium mb-2">Tips for this question:</h4>
+                  <ul class="text-sm text-gray-700 space-y-2 list-disc pl-5">
+                    <li>
+                      Focus on professional conflicts, not personal
+                      disagreements
+                    </li>
+                    <li>Emphasize your conflict resolution skills</li>
+                    <li>
+                      Show empathy and understanding of different perspectives
+                    </li>
+                    <li>
+                      Highlight positive outcomes and learning experiences
+                    </li>
+                  </ul>
+                </div>
+                <div class="pt-3 border-t border-gray-200">
+                  <button
+                    class="text-primary hover:text-primary/80 text-sm font-medium flex items-center"
+                  >
+                    <div class="w-5 h-5 flex items-center justify-center mr-1">
+                      <i class="ri-book-open-line"></i>
+                    </div>
+                    View sample answers
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Previous Performance -->
+            <div class="bg-white rounded-lg shadow-sm p-6">
+              <h3 class="text-lg font-semibold mb-4">Your Performance</h3>
+              <div class="space-y-4">
+                <div>
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="text-sm font-medium">Structure</span>
+                    <span class="text-sm font-medium">8/10</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div
+                      class="bg-green-500 h-2 rounded-full"
+                      style="width: 80%"
+                    ></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="text-sm font-medium">Content Relevance</span>
+                    <span class="text-sm font-medium">7/10</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div
+                      class="bg-green-500 h-2 rounded-full"
+                      style="width: 70%"
+                    ></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="text-sm font-medium">Communication</span>
+                    <span class="text-sm font-medium">9/10</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div
+                      class="bg-green-500 h-2 rounded-full"
+                      style="width: 90%"
+                    ></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="text-sm font-medium">Problem Solving</span>
+                    <span class="text-sm font-medium">6/10</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div
+                      class="bg-yellow-500 h-2 rounded-full"
+                      style="width: 60%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-5 pt-4 border-t border-gray-200">
+                <button
+                  class="text-primary hover:text-primary/80 text-sm font-medium flex items-center"
+                >
+                  <div class="w-5 h-5 flex items-center justify-center mr-1">
+                    <i class="ri-history-line"></i>
+                  </div>
+                  View previous answers
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

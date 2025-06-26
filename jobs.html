@@ -1,0 +1,2413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobs - CareerNest | Find Your Dream Tech Career</title>
+    <meta name="description" content="Discover top tech jobs from leading companies. Apply to positions at Google, Microsoft, Amazon, and more with CareerNest.">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #a5b4fc;
+            --secondary-color: #f59e0b;
+            --accent-color: #10b981;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-light: #94a3b8;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--text-secondary);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        /* Jobs Header */
+        .jobs-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .jobs-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .jobs-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        /* Enhanced Filters Section */
+        .filters-section {
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .filters-header {
+            margin-bottom: 24px;
+        }
+
+        .filters-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0;
+        }
+
+        .filters-title i {
+            color: var(--primary-color);
+        }
+
+        .filters-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .filter-select {
+            padding: 14px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            background: var(--bg-primary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 12px center;
+            background-repeat: no-repeat;
+            background-size: 16px;
+            padding-right: 40px;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .filter-select:hover {
+            border-color: var(--primary-light);
+        }
+
+        /* Job Type Section */
+        .job-type-section {
+            margin-top: 24px;
+        }
+
+        .job-type-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .job-type-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+        }
+
+        .job-type-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            background: var(--bg-primary);
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .job-type-option:hover {
+            border-color: var(--primary-light);
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .job-type-option:has(.job-type-checkbox:checked) {
+            border-color: var(--primary-color);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .job-type-checkbox {
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            appearance: none;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .job-type-checkbox:checked {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .job-type-checkbox:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .job-type-label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            user-select: none;
+        }
+
+        /* Search and Filters */
+        .search-section {
+            background: var(--bg-primary);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            margin-bottom: 60px;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 32px;
+            align-items: center;
+        }
+
+        .search-input-group {
+            flex: 1;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 16px 20px 16px 50px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            background: var(--bg-secondary);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .search-btn {
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Jobs Grid */
+        .jobs-container {
+            display: block;
+        }
+
+        /*/* Sidebar Filters */
+        .jobs-sidebar {
+            display: none;
+        }
+
+        .sidebar-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+*/
+        .filter-group {
+            margin-bottom: 32px;
+        }
+
+        .filter-group-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .filter-options {
+            display: flex;
+            /*flex-direction: column;*/
+            gap: 12px;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: background 0.2s ease;
+        }
+
+        .filter-option:hover {
+            background: var(--bg-secondary);
+        }
+
+        .filter-checkbox {
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .filter-checkbox.checked {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .filter-checkbox.checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .filter-label {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Jobs Grid */
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 24px;
+        }
+
+        /* Job Cards */
+        .job-card {
+            background: var(--bg-primary);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .job-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary-light);
+        }
+
+        .job-card-header {
+            padding: 24px 24px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .company-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: white;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .company-logo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+        }
+
+        /* Company-specific colors */
+        .logo-google { background: linear-gradient(135deg, #4285f4 0%, #34a853 100%); }
+        .logo-microsoft { background: linear-gradient(135deg, #00a1f1 0%, #0078d4 100%); }
+        .logo-amazon { background: linear-gradient(135deg, #ff9900 0%, #ff6600 100%); }
+        .logo-meta { background: linear-gradient(135deg, #1877f2 0%, #42a5f5 100%); }
+        .logo-apple { background: linear-gradient(135deg, #000000 0%, #333333 100%); }
+        .logo-netflix { background: linear-gradient(135deg, #e50914 0%, #b20710 100%); }
+        .logo-uber { background: linear-gradient(135deg, #000000 0%, #333333 100%); }
+        .logo-airbnb { background: linear-gradient(135deg, #ff5a5f 0%, #c13515 100%); }
+        .logo-spotify { background: linear-gradient(135deg, #1db954 0%, #1ed760 100%); }
+        .logo-default { background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%); }
+
+        .job-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .job-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .company-name {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .job-location {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+        .toggle-icon {
+          cursor: pointer;
+          position: relative;
+          display: inline-block;
+        }
+
+        .toggle-icon i {
+          font-size: 20px;
+          position: absolute;
+          right: 0;
+          transition: opacity 0.3s ease;
+        }
+
+        .toggle-icon .fa-solid {
+          opacity: 0;
+        }
+
+        .toggle-icon input:checked ~ .fa-regular {
+          opacity: 0;
+        }
+
+        .toggle-icon input:checked ~ .fa-solid {
+          opacity: 1;
+        }
+        .save-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            color: var(--text-light);
+        }
+
+        .save-btn:hover {
+            background: var(--bg-secondary);
+            color: var(--primary-color);
+        }
+
+        .job-card-body {
+            padding: 0 24px 24px;
+        }
+
+        .job-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .job-tag {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tag-salary {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+
+        .tag-type {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary-color);
+        }
+
+        .tag-experience {
+            background: rgba(245, 158, 11, 0.1);
+            color: #d97706;
+        }
+
+        .tag-remote {
+            background: rgba(139, 92, 246, 0.1);
+            color: #7c3aed;
+        }
+
+        .job-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .job-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .skill-tag {
+            padding: 4px 10px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .job-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .job-posted {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .job-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-apply {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-apply:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-details {
+            padding: 10px 20px;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-details:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* Results Info */
+        .results-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .results-count {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .sort-dropdown {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sort-label {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .sort-select {
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-primary);
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        /* Load More */
+        .load-more {
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .load-more-btn {
+            padding: 16px 40px;
+            background: var(--bg-primary);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .load-more-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        
+        /* Update jobs grid for full width */
+
+        /* Mobile responsive menu toggle (if needed) */
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .jobs-container {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .jobs-sidebar {
+                position: static;
+                order: 2;
+            }
+
+            .jobs-grid {
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .main-content {
+                padding: 20px 16px;
+            }
+
+            .jobs-title {
+                font-size: 2.5rem;
+            }
+
+            .search-section {
+                padding: 24px;
+            }
+
+            .search-bar {
+                flex-direction: column;
+            }
+
+            .jobs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .job-card-header {
+                padding: 20px 20px 0;
+            }
+
+            .job-card-body {
+                padding: 0 20px 20px;
+            }
+
+            .job-type-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .filters-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .jobs-title {
+                font-size: 2rem;
+            }
+
+            .company-logo {
+                width: 50px;
+                height: 50px;
+                font-size: 1rem;
+            }
+
+            .job-title {
+                font-size: 1.1rem;
+            }
+
+            .job-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .btn-apply, .btn-details {
+                width: 100%;
+                text-align: center;
+            }
+
+            .job-type-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .jobs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Update jobs grid for full width */
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 24px;
+        }
+        /* Profile section */
+		.profile {
+		  position: relative;
+		  display: flex;
+		  justify-content: end;
+		  align-items: center;
+		}
+
+		.profile img {
+		  width: 45px;
+		  height: 45px;
+		  border-radius: 50%;
+		  cursor: pointer;
+		  position: relative;
+		  left: 70px;
+		}
+
+		.dropdown {
+		  display: none;
+
+		  background-color: #fff;
+		  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+		  width: 160px;
+		}
+
+		.dropdown div {
+		  padding: 10px;
+		  color: #333;
+		  cursor: pointer;
+		}
+
+		.dropdown div:hover {
+		  background-color: #f2f2f2;
+		}
+
+		.profile:hover .dropdown {
+		  display: block;
+		}
+
+        .pill-navbar {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: transparent;
+          margin: 2rem 0 2.5rem 0;
+          position: fixed;
+          top: 0.1px;
+          left: 0;
+          z-index: 99;
+          pointer-events: none;
+        }
+        .pill-nav-list {
+          display: flex;
+          gap: 2rem;
+          background: #fafafa;
+          border: 2px solid #ededed;
+          border-radius: 2.5rem;
+          padding: 0.5rem 1.5rem;
+          list-style: none;
+          box-shadow: 0 2px 8px rgba(80,80,120,0.04);
+          pointer-events: auto;
+        }
+        .pill-nav-link {
+          display: inline-block;
+          padding: 0.7rem 1.7rem;
+          border-radius: 2rem;
+          color: #6b6b6b;
+          font-weight: 600;
+          font-size: 1.1rem;
+          background: transparent;
+          transition: background 0.25s, color 0.25s, box-shadow 0.25s;
+          text-decoration: none;
+          outline: none;
+          position: relative;
+        }
+        .pill-nav-link:focus {
+          box-shadow: 0 0 0 2px #6366f1;
+        }
+        .pill-nav-link:hover {
+          background: #e5e7eb;
+          color: #4f46e5;
+        }
+        .pill-nav-link.active, .pill-nav-link[aria-current="page"] {
+          background: linear-gradient(135deg, #6366f1 0%, #6d28d9 100%);
+          color: #fff;
+          box-shadow: 0 2px 8px rgba(80,80,120,0.08);
+        }
+        @media (max-width: 700px) {
+          .pill-navbar {
+            top: 0.1px;
+          }
+          .pill-nav-list {
+            gap: 0.5rem;
+            padding: 0.5rem 0.5rem;
+          }
+          .pill-nav-link {
+            font-size: 1rem;
+            padding: 0.6rem 1rem;
+          }
+        }
+    </style>
+</head>
+<body>
+    <nav class="pill-navbar" aria-label="Main Navigation">
+      <ul class="pill-nav-list">
+        <li><a href="dashboard.html" class="pill-nav-link">Dashboard</a></li>
+        <li><a href="jobs.html" class="pill-nav-link active" aria-current="page">Jobs</a></li>
+        <li><a href="resume.html" class="pill-nav-link">Resume</a></li>
+        <li><a href="interview.html" class="pill-nav-link">Interview</a></li>
+        <li><a href="mastery.html" class="pill-nav-link">Mastery</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content" style="margin-top: 5.5rem;">
+        <!-- Jobs Header -->
+        <div class="jobs-header">
+            <h1 class="jobs-title">Find Your Dream Job</h1>
+            <p class="jobs-subtitle">
+                Discover opportunities from top tech companies and startups. Your next career move is just a click away.
+            </p>
+        </div>
+
+        <!-- Search Section -->
+        <div class="search-section">
+            <div class="search-bar">
+                <div class="search-input-group">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Search jobs, companies, or keywords...">
+                </div>
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                    Search Jobs
+                </button>
+            </div>
+            
+            <!-- Filters Section -->
+            <div class="filters-section">
+                <div class="filters-header">
+                    <h3 class="filters-title">
+                        <i class="fas fa-filter"></i>
+                        Filters
+                    </h3>
+                </div>
+                
+                <div class="filters-row">
+                    <select class="filter-select">
+                        <option>Pass Out Year</option>
+                        <option>2024</option>
+                        <option>2025</option>
+                        <option>2026</option>
+                        <option>2027</option>
+                        <option>2028</option>
+                        <option>2029</option>
+                    </select>
+                    <select class="filter-select">
+                        <option> Experience</option>
+                        <option>0-1 years</option>
+                        <option>1-3 years</option>
+                        <option>3-5 years</option>
+                        <option>5+ years</option>
+                    </select>
+                    <select class="filter-select">
+                        <option>All Salaries</option>
+                        <option>0-5 LPA</option>
+                        <option>5-10 LPA</option>
+                        <option>10-20 LPA</option>
+                        <option>20+ LPA</option>
+                        <option>Internship Stipend</option>
+                    </select>
+                </div>
+                
+                <div class="job-type-section">
+                    <h4 class="job-type-title">Job Type</h4>
+                    <div class="job-type-options">
+                        <label class="job-type-option">
+                            <input type="checkbox" class="job-type-checkbox">
+                            <span class="job-type-label">Hackathons</span>
+                        </label>
+                        <label class="job-type-option">
+                            <input type="checkbox" class="job-type-checkbox">
+                            <span class="job-type-label">Ideathons</span>
+                        </label>
+                        <label class="job-type-option">
+                            <input type="checkbox" class="job-type-checkbox">
+                            <span class="job-type-label">Internships</span>
+                        </label>
+                        <label class="job-type-option">
+                            <input type="checkbox" class="job-type-checkbox">
+                            <span class="job-type-label">Full-Time</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <div class="jobs-grid">
+            		<!-- Job Card 1: Perplexity Hackathon -->
+					<div class="job-card" id="perplexity-card">
+					    <div class="job-card-header">
+					        <div class="company-logo" style="background-image: url(https://seeklogo.com/images/P/perplexity-ai-logo-13120A0AAE-seeklogo.com.png); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+					        <div class="job-info">
+					            <h3 class="job-title">Perplexity Hackathon</h3>
+					            <p class="company-name">Perplexity AI</p>
+					            <div class="job-location">
+					                <i class="fas fa-map-marker-alt"></i>
+					                Online • Global
+					            </div>
+					        </div>
+					        <label class="toggle-icon">
+					            <input type="checkbox" hidden>
+					            <i class="fa-regular fa-bookmark"></i>
+					            <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+					        </label>
+					    </div>
+					    <div class="job-card-body">
+					        <div class="job-tags">
+					            <span class="job-tag tag-salary">$35,000 Prize Pool</span>
+					            <span class="job-tag tag-type">Hackathon</span>
+					            <!-- <span class="job-tag tag-experience">All Developers</span> -->
+					        </div>
+					        <p class="job-description">
+					            Use Perplexity's Sonar API to build apps that inspire curiosity or solve complex problems. Compete globally and win up to $10,000. Projects must use Sonar API and include a demo video & repo.
+					        </p>
+					        <div class="job-skills">
+					            <span class="skill-tag">AI/ML</span>
+					            <span class="skill-tag">Deep Research</span>
+					            <span class="skill-tag">Fintech</span>
+					            <!-- <span class="skill-tag">Health</span> -->
+					            <span class="skill-tag">Creativity</span>
+					        </div>
+					        <div class="job-card-footer">
+					            <span class="job-posted">Posted 5 days ago</span>
+					            <div class="job-actions">
+					            <a class="btn-details" href="https://perplexityhackathon.devpost.com/" target="_main">View Details</a>
+					            <a class="btn-apply" href="https://perplexityhackathon.devpost.com/" target="_main">Apply Now</a>
+					        </div>
+					        </div>
+					    </div>
+					</div>
+
+					<!-- Job Card 2: HackVega -->
+					<div class="job-card" id="hackvega-card">
+					    <div class="job-card-header">
+					        <div class="company-logo" style="background-image: url(https://media.trustradius.com/product-logos/xi/Mx/7QRKHRD86NN8-180x180.JPEG); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+					        <div class="job-info">
+					            <h3 class="job-title">HackVega 2025</h3>
+					            <p class="company-name">HirePro</p>
+					            <div class="job-location">
+					                <i class="fas fa-map-marker-alt"></i>
+					                Virtual • PAN India
+					            </div>
+					        </div>
+					        <label class="toggle-icon">
+					            <input type="checkbox" hidden>
+					            <i class="fa-regular fa-bookmark"></i>
+					            <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+					        </label>
+					    </div>
+					    <div class="job-card-body">
+					        <div class="job-tags">
+					            <span class="job-tag tag-salary">₹3.5 Lakh Prizes</span>
+					            <span class="job-tag tag-type">Hackathon</span>
+					            <!-- <span class="job-tag tag-experience">2025–2027 Grads</span> -->
+					        </div>
+					        <p class="job-description">
+					            HackVega is your shot at tech glory! Compete nationally, solve real-world challenges, and shine at Momentum'25 with top corporates watching. Win up to ₹1 Lakh for first place and gain recognition.
+					        </p>
+					        <div class="job-skills">
+					            <span class="skill-tag">Hackathon</span>
+					            <span class="skill-tag">Problem Solving</span>
+					            <span class="skill-tag">Creativity</span>
+					            <!-- <span class="skill-tag">Leadership</span> -->
+					        </div>
+					        <div class="job-card-footer">
+					            <span class="job-posted">Posted 7 days ago</span>
+					            <div class="job-actions">
+					                <a class="btn-details" href="https://mycareernet.in/mycareernet/contests/HirePro-HackVega-230" target="_main">View Details</a>
+					                <a class="btn-apply" href="https://mycareernet.in/mycareernet/contests/HirePro-HackVega-230" target="_main">Apply Now</a>
+					            </div>
+					        </div>
+					    </div>
+					</div>
+					<!-- Job Card 3: GenAI Hackathon by Impetus & AWS -->
+					<div class="job-card" id="genai-card">
+					    <div class="job-card-header">
+					        <div class="company-logo" style="background-image: url(https://www.impetus.com/wp-content/uploads/2022/03/impetus-social-logo.png); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+					        <div class="job-info">
+					            <h3 class="job-title">GenAI Hackathon</h3>
+					            <p class="company-name">Impetus & AWS</p>
+					            <div class="job-location">
+					                <i class="fas fa-map-marker-alt"></i>
+					                Online • Global
+					            </div>
+					        </div>
+					        <label class="toggle-icon">
+					            <input type="checkbox" hidden>
+					            <i class="fa-regular fa-bookmark"></i>
+					            <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+					        </label>
+					    </div>
+					    <div class="job-card-body">
+					        <div class="job-tags">
+					            <span class="job-tag tag-salary">$13,000 Prize Pool</span>
+					            <span class="job-tag tag-type">Hackathon</span>
+					            <!-- <span class="job-tag tag-experience">Open to All</span> -->
+					        </div>
+					        <p class="job-description">
+					            Build innovative Generative AI solutions using AWS cloud services. Win up to $10,000, earn mentorship, AWS credits, and showcase your solution globally. Deadline: July 11, 2025.
+					        </p>
+					        <div class="job-skills">
+					            <span class="skill-tag">Generative AI</span>
+					            <span class="skill-tag">AWS</span>
+					            <span class="skill-tag">Streamlit/Gradio</span>
+					            <span class="skill-tag">ML/LLM</span>
+					            <!-- <span class="skill-tag">Innovation</span> -->
+					        </div>
+					        <div class="job-card-footer">
+					            <span class="job-posted">15 days left</span>
+					            <div class="job-actions">
+                                    <a class="btn-details" href="https://impetusawsgenaihackathon.devpost.com/" target="_main">View Details</a>
+                                    <a class="btn-apply" href="https://impetusawsgenaihackathon.devpost.com/" target="_main">Apply Now</a>
+                                </div>
+					        </div>
+					    </div>
+					</div>
+
+					<!-- Job Card 4: Sankalp 101 Hackathon -->
+					<div class="job-card" id="sankalp101-card">
+					    <div class="job-card-header">
+					        <div class="company-logo" style="background-image: url(https://sankalp.stuorg.iastate.edu/wp-content/uploads/2014/12/Sankalp-Logo.png); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+					        <div class="job-info">
+					            <h3 class="job-title">Sankalp 101 - 24H Hackathon</h3>
+					            <p class="company-name">TrishulX Community</p>
+					            <div class="job-location">
+					                <i class="fas fa-map-marker-alt"></i>
+					                Online • India
+					            </div>
+					        </div>
+					        <label class="toggle-icon">
+					            <input type="checkbox" hidden>
+					            <i class="fa-regular fa-bookmark"></i>
+					            <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+					        </label>
+					    </div>
+					    <div class="job-card-body">
+					        <div class="job-tags">
+					            <span class="job-tag tag-salary">Exciting Goodies</span>
+					            <span class="job-tag tag-type">Hackathon</span>
+					            <!-- <span class="job-tag tag-experience">UG • PG • PhD</span> -->
+					        </div>
+					        <p class="job-description">
+					            India's first 24-hour virtual 2D hackathon hosted on Gather.town. Collaborate, code, and compete in an immersive gamified space with prizes, VIP memberships, and exclusive goodies.
+					        </p>
+					        <div class="job-skills">
+					            <span class="skill-tag">Generative AI</span>
+					            <span class="skill-tag">Blockchain</span>
+					            <!-- <span class="skill-tag">ClimateTech</span> -->
+					            <!-- <span class="skill-tag">Healthcare</span> -->
+					            <span class="skill-tag">EdTech</span>
+					        </div>
+					        <div class="job-card-footer">
+					            <span class="job-posted">2 weeks left</span>
+					            <div class="job-actions">
+                                    <a class="btn-details" href="https://unstop.com/hackathons/sankalp-101-24-hour-virtual-2d-hackathon-trishulx-community-1479276" target="_main">View Details</a>
+                                    <a class="btn-apply" href="https://unstop.com/hackathons/sankalp-101-24-hour-virtual-2d-hackathon-trishulx-community-1479276" target="_main">Apply Now</a>
+                                </div>
+					        </div>
+					    </div>
+					</div>
+
+
+                    <!-- Job Card 5: Walmart Sparkathon -->
+                    <div class="job-card">
+                        <div class="job-card-header">
+                            <div class="company-logo" style="background-image: url(https://logodix.com/logo/4821.png); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+                            <div class="job-info">
+                                <h3 class="job-title">Innovation Challenge</h3>
+                                <p class="company-name">Walmart Sparkathon</p>
+                                <div class="job-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Virtual • Remote
+                                </div>
+                            </div>
+                            <label class="toggle-icon">
+                                <input type="checkbox" hidden>
+                                <i class="fa-regular fa-bookmark"></i>
+                                <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+                            </label>
+                        </div>
+                        <div class="job-card-body">
+                            <div class="job-tags">
+                                <span class="job-tag tag-salary">Rewards</span>
+                                <span class="job-tag tag-type">Challenge</span>
+                            </div>
+                            <p class="job-description">
+                                Compete in Walmart Sparkathon, ideating and building tech solutions for retail challenges. Top teams get a chance for internships and PPOs.
+                            </p>
+                            <div class="job-skills">
+                                <span class="skill-tag">UI/UX</span>
+                                <span class="skill-tag">Innovation</span>
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">Retail Tech</span>
+                            </div>
+                            <div class="job-card-footer">
+                                <span class="job-posted">Posted 5 days ago</span>
+                                <div class="job-actions">
+                                    <a class="btn-details" href="https://walmart.converge.tech/content/converge/en_in/sparkathon.html" target="_main">View Details</a>
+                                    <a class="btn-apply" href="https://walmart.converge.tech/content/converge/en_in/sparkathon/registration.html" target="_main">Apply Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Job Card 6: Adobe India Hackathon -->
+					<div class="job-card">
+					    <div class="job-card-header">
+					        <div class="company-logo"
+					            style="background-image: url(https://blog.adobe.com/de/publish/2020/05/28/media_16b3b0de339a5aa325a34196c56343c8b18522cf8.png?width=1200&format=pjpg&optimize=medium); background-size: 150px; background-position: center; background-repeat: no-repeat;">
+					        </div>
+					        <div class="job-info">
+					            <h3 class="job-title">Adobe India Hackathon</h3>
+					            <p class="company-name">Adobe Systems</p>
+					            <div class="job-location">
+					                <i class="fas fa-map-marker-alt"></i>
+					                India • Online / Hybrid
+					            </div>
+					        </div>
+					        <label class="toggle-icon">
+					            <input type="checkbox" hidden>
+					            <i class="fa-regular fa-bookmark"></i>
+					            <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+					        </label>
+					    </div>
+					    <div class="job-card-body">
+					        <div class="job-tags">
+					            <span class="job-tag tag-salary">Exciting Prizes</span>
+					            <span class="job-tag tag-type">Hackathon</span>
+					            <!-- <span class="job-tag tag-experience">Open to All Years</span> -->
+					        </div>
+					        <p class="job-description">
+					            Participate in Adobe's flagship hackathon to showcase your problem-solving skills, creativity, and coding talent. Build innovative solutions and get a chance to intern or work at Adobe!
+					        </p>
+					        <div class="job-skills">
+					            <span class="skill-tag">UI/UX</span>
+					            <span class="skill-tag">Frontend & Backend</span>
+					            <span class="skill-tag">Problem Solving</span>
+					            <!-- <span class="skill-tag">Teamwork</span> -->
+					        </div>
+					        <div class="job-card-footer">
+					            <span class="job-posted">Posted 1 week ago</span>
+					            <div class="job-actions">
+					                <a class="btn-details" href="https://unstop.com/hackathons/adobe-india-hackathon-adobe-1483364?lb=vMoxrnR&utm_medium=Share&utm_source=WhatsApp" target="_main">View Details</a>
+					                <a class="btn-apply" href="https://unstop.com/competitions/1483364/register?lb=vMoxrnR&utm_medium=Share&utm_source=WhatsApp" target="_main">Apply Now</a>
+					            </div>
+					        </div>
+					    </div>
+					</div>
+					<!-- Job Card 7: Cisco Ideathon -->
+				<div class="job-card" id="cisco-card">
+				    <div class="job-card-header">
+				        <div class="company-logo" style="background-image: url(https://static.vecteezy.com/system/resources/previews/024/555/159/non_2x/cisco-logo-transparent-free-png.png); background-size: 140px; background-position: center; background-repeat: no-repeat;"></div>
+				        <div class="job-info">
+				            <h3 class="job-title">Cisco Ideathon 2025</h3>
+				            <p class="company-name">Cisco Systems</p>
+				            <div class="job-location">
+				                <i class="fas fa-map-marker-alt"></i>
+				                India • Online
+				            </div>
+				        </div>
+				        <label class="toggle-icon">
+				            <input type="checkbox" hidden>
+				            <i class="fa-regular fa-bookmark"></i>
+				            <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+				        </label>
+				    </div>
+				    <div class="job-card-body">
+				        <div class="job-tags">
+				            <span class="job-tag tag-salary">PPO + Goodies</span>
+				            <span class="job-tag tag-type">Ideathon</span>
+				            <span class="job-tag tag-experience">B.Tech 2025/26</span>
+				        </div>
+				        <p class="job-description">
+				            Cisco Ideathon is your launchpad to innovation. Compete in tech-driven challenges, collaborate with peers, and stand a chance to receive mentorship and Pre-Placement Offers (PPOs) at Cisco.
+				        </p>
+				        <div class="job-skills">
+				            <span class="skill-tag">Innovation</span>
+				            <span class="skill-tag">Problem Solving</span>
+				            <span class="skill-tag">Team Collaboration</span>
+				            <!-- <span class="skill-tag">Communication</span> -->
+				        </div>
+				        <div class="job-card-footer">
+				            <span class="job-posted">Posted 1 week ago</span>
+				            <div class="job-actions">
+				                <a class="btn-details" href="all_jobs/cisco.html" target="_main">View Details</a>
+				                <a class="btn-apply" href="all_jobs/cisco.html" target="_main">Apply Now</a>
+				            </div>
+				        </div>
+				    </div>
+				</div>
+                    <div class="job-card">
+                        <!-- Job Card 8: Flipkart Grid -->
+                        <div class="job-card-header">
+                            <div class="company-logo" style="background-image: url(https://assets.entrepreneur.com/content/3x2/2000/20181003130628-20180704142151-20180511063849-flipkart-logo-detail-icon.jpeg); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                               
+                            </div>
+                            <div class="job-info">
+                                <h3 class="job-title">Software Development Intern</h3>
+                                <p class="company-name">Flipkart Grid 6.0</p>
+                                <div class="job-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Bengaluru • Hybrid
+                                </div>
+                            </div>
+                            <label class="toggle-icon">
+                                <input type="checkbox" hidden>
+                                <i class="fa-regular fa-bookmark"></i>
+                                <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+                            </label>
+                        </div>
+                        <div class="job-card-body">
+                            <div class="job-tags">
+                                <span class="job-tag tag-salary">Stipend</span>
+                                <span class="job-tag tag-type">Internship</span>
+                                <span class="job-tag tag-experience">Students</span>
+                            </div>
+                            <p class="job-description">
+                                Participate in real-world problem solving with Flipkart's flagship tech competition. Gain mentorship and hands-on experience working on scalable e-commerce systems.
+                            </p>
+                            <div class="job-skills">
+                                <span class="skill-tag">DSA</span>
+                                <span class="skill-tag">System Design</span>
+                                <span class="skill-tag">Java</span>
+                                <span class="skill-tag">API Design</span>
+                            </div>
+                            <div class="job-card-footer">
+                                <span class="job-posted">Posted 2 days ago</span>
+                                <div class="job-actions">
+                                    <a class="btn-details" href="https://mycareernet.in/mycareernet/contests/Flipkart-Flipkart-GRiD-7-0--234?source=KrishanKumarLinkedin" target="_main">View Details</a>
+                                    <a class="btn-apply" href="https://mycareernet.in/mycareernet/contests/Flipkart-Flipkart-GRiD-7-0--234?source=KrishanKumarLinkedin" target="_main">Apply Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Job Card 9: Upstox -->
+                    <div class="job-card">
+                        <div class="job-card-header">
+                            <div class="company-logo" style="background: linear-gradient(135deg, #000046 0%, #1CB5E0 100%);">
+                                <span style="font-size: 15px;">Upstox</span>
+                            </div>
+                            <div class="job-info">
+                                <h3 class="job-title">SDE Intern</h3>
+                                <p class="company-name">Upstox</p>
+                                <div class="job-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Mumbai • Remote/Hybrid
+                                </div>
+                            </div>
+                            <label class="toggle-icon">
+                                <input type="checkbox" hidden>
+                                <i class="fa-regular fa-bookmark"></i>
+                                <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+                            </label>
+                        </div>
+                        <div class="job-card-body">
+                            <div class="job-tags">
+                                <span class="job-tag tag-salary">Stipend</span>
+                                <span class="job-tag tag-type">Internship</span>
+                                <span class="job-tag tag-experience">2026/27 Batch</span>
+                            </div>
+                            <p class="job-description">
+                                Work with the Upstox engineering team on real-time stock trading systems. A 6-month internship designed for passionate coders from the 2026/27 batches.
+                            </p>
+                            <div class="job-skills">
+                                <span class="skill-tag">Java</span>
+                                <span class="skill-tag">DSA</span>
+                                <span class="skill-tag">Problem Solving</span>
+                                <span class="skill-tag">Spring Boot</span>
+                            </div>
+                            <div class="job-card-footer">
+                                <span class="job-posted">Posted 1 day ago</span>
+                                <div class="job-actions">
+                                    <a class="btn-details" href="https://jobs.lever.co/upstox/ce3af61d-dc9c-4041-a586-7dd3077fd62c" target="_main">View Details</a>
+                                    <a class="btn-apply" href="https://jobs.lever.co/upstox/ce3af61d-dc9c-4041-a586-7dd3077fd62c/apply" target="_main">Apply Now</a>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Job Card 10: Meesho -->
+                    <div class="job-card">
+                        <div class="job-card-header">
+                            <div class="company-logo" style="background-image: url(https://img.etimg.com/thumb/msid-100854856,width-650,height-488,imgsize-4636,,resizemode-75/meesho-brand-identity.jpg); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+                            <div class="job-info">
+                                <h3 class="job-title">Backend Developer Intern</h3>
+                                <p class="company-name">Meesho</p>
+                                <div class="job-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Bengaluru • On-site
+                                </div>
+                            </div>
+                            <label class="toggle-icon">
+                                <input type="checkbox" hidden>
+                                <i class="fa-regular fa-bookmark"></i>
+                                <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+                            </label>
+                        </div>
+                        <div class="job-card-body">
+                            <div class="job-tags">
+                                <span class="job-tag tag-salary">₹35K/month</span>
+                                <span class="job-tag tag-type">Internship</span>
+                                <span class="job-tag tag-experience">Students</span>
+                            </div>
+                            <p class="job-description">
+                                Join Meesho's fast-paced tech team and build scalable backend systems for India's largest social commerce platform.
+                            </p>
+                            <div class="job-skills">
+                                <span class="skill-tag">Node.js</span>
+                                <span class="skill-tag">MongoDB</span>
+                                <span class="skill-tag">Microservices</span>
+                                <span class="skill-tag">API</span>
+                            </div>
+                            <div class="job-card-footer">
+                                <span class="job-posted">Posted 3 days ago</span>
+                                <div class="job-actions">
+                                    <a class="btn-details" href="https://www.hackerearth.com/challenges/hackathon/scriptedbyher-reg/?utm_source=external&utm_medium=scout_1&utm_campaign=scriptedbyher-reg" target="_main">View Details</a>
+                                    <a class="btn-apply" href="https://www.hackerearth.com/challenges/hackathon/scriptedbyher-reg/?utm_source=external&utm_medium=scout_1&utm_campaign=scriptedbyher-reg" target="_main">Apply Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Job Card 11: Google Internship -->
+                    <div class="job-card">
+                        <div class="job-card-header">
+                            <div class="company-logo" style="background-image: url(https://cdn2.hubspot.net/hubfs/53/image8-2.jpg); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+                            <div class="job-info">
+                                <h3 class="job-title">Software Engineering Intern</h3>
+                                <p class="company-name">Google</p>
+                                <div class="job-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Bangalore • On-site
+                                </div>
+                            </div>
+                            <label class="toggle-icon">
+                              <input type="checkbox" hidden>
+                              <i class="fa-regular fa-bookmark"></i>
+                              <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+                            </label>
+                        </div>
+                        <div class="job-card-body">
+                            <div class="job-tags">
+                                <span class="job-tag tag-salary">₹1,35,000/MTH</span>
+                                <span class="job-tag tag-type">Internship</span>
+                                <span class="job-tag tag-experience">Student</span>
+                            </div>
+                            <p class="job-description">
+                                Join Google's world-class engineering team as an intern. Work on products used by billions of users and learn from the best engineers in the industry.
+                            </p>
+                            <div class="job-skills">
+                                <span class="skill-tag">Java</span>
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">C++</span>
+                                <span class="skill-tag">Algorithms</span>
+                                <span class="skill-tag">DSA</span>
+                            </div>
+                            <div class="job-card-footer">
+                                <span class="job-posted">Posted 2 days ago</span>
+                                <div class="job-actions">
+                                    <a class="btn-details" href="all_jobs/google.html" target="_main">View Details</a>
+                                    <a class="btn-apply" href="all_jobs/google.html" target="_main">Apply Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Job Card 12: Juspay Hiring Challenge 2025 -->
+					<div class="job-card" id="juspay-card">
+					    <div class="job-card-header">
+					        <div class="company-logo" style="background-image: url(https://www.wellesleyhillsfinancial.com/wp-content/uploads/2021/12/Juspay.jpg); background-size: 120px; background-position: center; background-repeat: no-repeat;"></div>
+					        <div class="job-info">
+					            <h3 class="job-title">Hiring Challenge 2025</h3>
+					            <p class="company-name">Juspay</p>
+					            <div class="job-location">
+					                <i class="fas fa-map-marker-alt"></i>
+					                Bangalore • Onsite
+					            </div>
+					        </div>
+					        <label class="toggle-icon">
+					            <input type="checkbox" hidden>
+					            <i class="fa-regular fa-bookmark"></i>
+					            <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+					        </label>
+					    </div>
+					    <div class="job-card-body">
+					        <div class="job-tags">
+					            <span class="job-tag tag-salary">₹40K/MTH (Intern)</span>
+					            <span class="job-tag tag-type">Internship</span>
+					        </div>
+					        <p class="job-description">
+					            Juspay is hiring through its 2025 Challenge! Open to 2026 graduates, this is your chance to intern in Bangalore and land a full-time offer worth ₹21–27 LPA.
+					        </p>
+					        <div class="job-skills">
+					            <span class="skill-tag">Programming</span>
+					            <span class="skill-tag">Haskell/Scala</span>
+					            <span class="skill-tag">Problem Solving</span>
+					            <!-- <span class="skill-tag">Product Thinking</span> -->
+					        </div>
+					        <div class="job-card-footer">
+					            <span class="job-posted">Posted recently</span>
+					            <div class="job-actions">
+					                <a class="btn-details" href="https://unstop.com/competitions/juspay-hiring-challenge-2025-juspay-1466934?lb=NcRhAyg" target="_main">View Details</a>
+					                <a class="btn-apply" href="https://unstop.com/competitions/juspay-hiring-challenge-2025-juspay-1466934/register?lb=NcRhAyg" target="_main">Apply Now</a>
+					            </div>
+					        </div>
+					    </div>
+					</div>
+					<!-- Job Card 13: JopSmart Fulltime role -->
+					<div class="job-card">
+					    <div class="job-card-header">
+					        <div class="company-logo" style="background-image: url(https://images.yourstory.com/cs/images/companies/zopsmartlogo-1710159203060.jpg?fm=auto&ar=1:1&mode=fill&fill=solid&fill-color=fff); background-size: 70px; background-position: center; background-repeat: no-repeat;"></div>
+					        <div class="job-info">
+					            <h3 class="job-title">Backend Developer Intern</h3>
+					            <p class="company-name">Zopsmart</p>
+					            <div class="job-location">
+					                <i class="fas fa-map-marker-alt"></i>
+					                Bengaluru • On-site
+					            </div>
+					        </div>
+					        <label class="toggle-icon">
+					            <input type="checkbox" hidden>
+					            <i class="fa-regular fa-bookmark"></i>
+					            <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+					        </label>
+					    </div>
+					    <div class="job-card-body">
+					        <div class="job-tags">
+					            <span class="job-tag tag-salary">₹30K/month</span>
+					            <span class="job-tag tag-type">Internship</span>
+					            <span class="job-tag tag-experience">Final Year</span>
+					        </div>
+					        <p class="job-description">
+					            Work on backend APIs and microservices powering retail e-commerce. Get mentored by industry professionals at Zopsmart.
+					        </p>
+					        <div class="job-skills">
+					            <span class="skill-tag">Java</span>
+					            <span class="skill-tag">Spring Boot</span>
+					            <span class="skill-tag">Microservices</span>
+					            <span class="skill-tag">MySQL</span>
+					        </div>
+					        <div class="job-card-footer">
+					            <span class="job-posted">Posted 2 days ago</span>
+					            <div class="job-actions">
+                                    <a class="btn-details" href="zopsmart.html" target="_main">View Details</a>
+                                    <a class="btn-apply" href="zopsmart.html" target="_main">Apply Now</a>
+                                </div>
+					        </div>
+					    </div>
+					</div>
+					<!-- 14. Josh Talks -->
+					<div class="job-card">
+					    <div class="job-card-header">
+					        <div class="company-logo" style="background: linear-gradient(135deg, #ff6f00 0%, #ff8f00 100%);">
+					            <span>Josh</span>
+					        </div>
+					        <div class="job-info">
+					            <h3 class="job-title">Frontend Engineer</h3>
+					            <p class="company-name">Josh Talks</p>
+					            <div class="job-location">
+					                <i class="fas fa-map-marker-alt"></i>
+					                Gurgaon • Hybrid
+					            </div>
+					        </div>
+					        <label class="toggle-icon">
+					            <input type="checkbox" hidden>
+					            <i class="fa-regular fa-bookmark"></i>
+					            <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+					        </label>
+					    </div>
+					    <div class="job-card-body">
+					        <div class="job-tags">
+					            <span class="job-tag tag-salary">₹10 LPA</span>
+					            <span class="job-tag tag-type">Full-time</span>
+					            <span class="job-tag tag-experience">0-2 years</span>
+					        </div>
+					        <p class="job-description">
+					            Design and develop intuitive, user-facing features to enhance the Josh Talks platform and impact millions across India.
+					        </p>
+					        <div class="job-skills">
+					            <span class="skill-tag">React</span>
+					            <span class="skill-tag">HTML</span>
+					            <span class="skill-tag">CSS</span>
+					            <span class="skill-tag">JavaScript</span>
+					        </div>
+					        <div class="job-card-footer">
+					            <span class="job-posted">Posted 3 days ago</span>
+					            <div class="job-actions">
+                                    <a class="btn-details" href="josh.html" target="_main">View Details</a>
+                                    <a class="btn-apply" href="josh.html" target="_main">Apply Now</a>
+                                </div>
+					        </div>
+					    </div>
+					</div>
+					<!--15.  LG -->
+					<div class="job-card">
+					    <div class="job-card-header">
+					        <div class="company-logo" style="background: linear-gradient(135deg, #a50034 0%, #c2185b 100%);">
+					            <span>LG</span>
+					        </div>
+					        <div class="job-info">
+					            <h3 class="job-title">Embedded Software Engineer</h3>
+					            <p class="company-name">LG Electronics</p>
+					            <div class="job-location">
+					                <i class="fas fa-map-marker-alt"></i>
+					                Noida • On-site
+					            </div>
+					        </div>
+					        <label class="toggle-icon">
+					            <input type="checkbox" hidden>
+					            <i class="fa-regular fa-bookmark"></i>
+					            <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+					        </label>
+					    </div>
+					    <div class="job-card-body">
+					        <div class="job-tags">
+					            <span class="job-tag tag-salary">₹9 LPA</span>
+					            <span class="job-tag tag-type">Full-time</span>
+					            <span class="job-tag tag-experience">1-3 years</span>
+					        </div>
+					        <p class="job-description">
+					            Develop and optimize firmware for smart appliances. Be part of LG's innovation team working on cutting-edge consumer electronics.
+					        </p>
+					        <div class="job-skills">
+					            <span class="skill-tag">C</span>
+					            <span class="skill-tag">RTOS</span>
+					            <span class="skill-tag">Embedded Systems</span>
+					            <span class="skill-tag">IoT</span>
+					        </div>
+					        <div class="job-card-footer">
+					            <span class="job-posted">Posted 4 days ago</span>
+					            <div class="job-actions">
+                                    <a class="btn-details" href="lg.html" target="_main">View Details</a>
+                                    <a class="btn-apply" href="lg.html" target="_main">Apply Now</a>
+                                </div>
+					        </div>
+					    </div>
+					</div>
+					<!-- 16. HP -->
+					<div class="job-card">
+					    <div class="job-card-header">
+					        <div class="company-logo" style="background: linear-gradient(135deg, #0096d6 0%, #005b94 100%);">
+					            <span>HP</span>
+					        </div>
+					        <div class="job-info">
+					            <h3 class="job-title">Software QA Engineer</h3>
+					            <p class="company-name">HP Inc.</p>
+					            <div class="job-location">
+					                <i class="fas fa-map-marker-alt"></i>
+					                Bengaluru • On-site
+					            </div>
+					        </div>
+					        <label class="toggle-icon">
+					            <input type="checkbox" hidden>
+					            <i class="fa-regular fa-bookmark"></i>
+					            <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+					        </label>
+					    </div>
+					    <div class="job-card-body">
+					        <div class="job-tags">
+					            <span class="job-tag tag-salary">₹11 LPA</span>
+					            <span class="job-tag tag-type">Full-time</span>
+					            <span class="job-tag tag-experience">1+ years</span>
+					        </div>
+					        <p class="job-description">
+					            Lead automation and QA testing for HP software and print solutions. Ensure high-quality releases with thorough test coverage.
+					        </p>
+					        <div class="job-skills">
+					            <span class="skill-tag">Selenium</span>
+					            <span class="skill-tag">Python</span>
+					            <span class="skill-tag">Automation</span>
+					            <span class="skill-tag">Git</span>
+					        </div>
+					        <div class="job-card-footer">
+					            <span class="job-posted">Posted 1 week ago</span>
+					            <div class="job-actions">
+                                    <a class="btn-details" href="#" target="_main">View Details</a>
+                                    <a class="btn-apply" href="#" target="_main">Apply Now</a>
+                                </div>
+					        </div>
+					    </div>
+					</div>
+					<!-- 17. Lloyds -->
+					<div class="job-card">
+					    <div class="job-card-header">
+					        <div class="company-logo" style="background: linear-gradient(135deg, #003300 0%, #007a33 100%);">
+					            <span>Lloyds</span>
+					        </div>
+					        <div class="job-info">
+					            <h3 class="job-title">Technology Graduate Analyst</h3>
+					            <p class="company-name">Lloyds Banking Group</p>
+					            <div class="job-location">
+					                <i class="fas fa-map-marker-alt"></i>
+					                London • Hybrid
+					            </div>
+					        </div>
+					        <label class="toggle-icon">
+					            <input type="checkbox" hidden>
+					            <i class="fa-regular fa-bookmark"></i>
+					            <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+					        </label>
+					    </div>
+					    <div class="job-card-body">
+					        <div class="job-tags">
+					            <span class="job-tag tag-salary">£35K/year</span>
+					            <span class="job-tag tag-type">Full-time</span>
+					            <span class="job-tag tag-experience">Freshers</span>
+					        </div>
+					        <p class="job-description">
+					            Start your fintech career with Lloyds through the Graduate Analyst Programme. Get trained in cloud, data, and cyber technologies.
+					        </p>
+					        <div class="job-skills">
+					            <span class="skill-tag">Cloud</span>
+					            <span class="skill-tag">Cybersecurity</span>
+					            <span class="skill-tag">Data Engineering</span>
+					            <span class="skill-tag">Agile</span>
+					        </div>
+					        <div class="job-card-footer">
+					            <span class="job-posted">Posted a week ago</span>
+					            <div class="job-actions">
+                                    <a class="btn-details" href="#" target="_main">View Details</a>
+                                    <a class="btn-apply" href="#" target="_main">Apply Now</a>
+                                </div>
+					        </div>
+					    </div>
+					</div>
+					<!-- 18. IBM -->
+					<div class="job-card">
+					    <div class="job-card-header">
+					        <div class="company-logo" style="background: linear-gradient(135deg, #003366 0%, #336699 100%);">
+					            <span>IBM</span>
+					        </div>
+					        <div class="job-info">
+					            <h3 class="job-title">Associate Software Engineer</h3>
+					            <p class="company-name">IBM India Pvt Ltd</p>
+					            <div class="job-location">
+					                <i class="fas fa-map-marker-alt"></i>
+					                Multiple Locations • On-site
+					            </div>
+					        </div>
+					        <label class="toggle-icon">
+					            <input type="checkbox" hidden>
+					            <i class="fa-regular fa-bookmark"></i>
+					            <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+					        </label>
+					    </div>
+					    <div class="job-card-body">
+					        <div class="job-tags">
+					            <span class="job-tag tag-salary">₹4.5 - 6 LPA</span>
+					            <span class="job-tag tag-type">Full-time</span>
+					            <span class="job-tag tag-experience">Fresher</span>
+					        </div>
+					        <p class="job-description">
+					            Join IBM's global delivery team to work on enterprise-grade applications. Get trained and deployed across cloud, AI, and full-stack technologies.
+					        </p>
+					        <div class="job-skills">
+					            <span class="skill-tag">Java</span>
+					            <span class="skill-tag">Cloud</span>
+					            <span class="skill-tag">Git</span>
+					            <span class="skill-tag">Linux</span>
+					        </div>
+					        <div class="job-card-footer">
+					            <span class="job-posted">Posted 5 days ago</span>
+					            <div class="job-actions">
+                                    <a class="btn-details" href="#" target="_main">View Details</a>
+                                    <a class="btn-apply" href="#" target="_main">Apply Now</a>
+                                </div>
+					        </div>
+					    </div>
+					</div>
+                    <!-- Job Card 19: AWS -->
+                    <div class="job-card">
+                        <div class="job-card-header">
+                            <div class="company-logo" style="background-image: url(https://gadget.co.za/wp-content/uploads/2020/12/aws-logo-scaled.jpg); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+                            <div class="job-info">
+                                <h3 class="job-title">Cloud Solutions Architect</h3>
+                                <p class="company-name">Amazon Web Services</p>
+                                <div class="job-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Hyderabad • On-site
+                                </div>
+                            </div>
+                            <label class="toggle-icon">
+                              <input type="checkbox" hidden>
+                              <i class="fa-regular fa-bookmark"></i>
+                              <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+                            </label>
+                        </div>
+                        <div class="job-card-body">
+                            <div class="job-tags">
+                                <span class="job-tag tag-salary">₹19 LPA</span>
+                                <span class="job-tag tag-type">Full-time</span>
+                                <span class="job-tag tag-experience">3-6 years</span>
+                            </div>
+                            <p class="job-description">
+                                Help customers architect scalable, highly available application solutions that leverage AWS services. Drive cloud adoption and digital transformation.
+                            </p>
+                            <div class="job-skills">
+                                <span class="skill-tag">AWS</span>
+                                <span class="skill-tag">Cloud Architecture</span>
+                                <span class="skill-tag">DevOps</span>
+                                <span class="skill-tag">Kubernetes</span>
+                            </div>
+                            <div class="job-card-footer">
+                                <span class="job-posted">Posted 3 days ago</span>
+                                <div class="job-actions">
+                                    <a class="btn-details" href="#" target="_main">View Details</a>
+                                    <a class="btn-apply" href="#" target="_main">Apply Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Job Card 20: Cisco -->
+                    <div class="job-card">
+                        <div class="job-card-header">
+                            <div class="company-logo" style="background-image: url(https://static.vecteezy.com/system/resources/previews/024/555/159/non_2x/cisco-logo-transparent-free-png.png); background-size: 140px; background-position: center; background-repeat: no-repeat;"></div>
+                            <div class="job-info">
+                                <h3 class="job-title">Network Software Engineer</h3>
+                                <p class="company-name">Cisco Systems</p>
+                                <div class="job-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Bangalore • Hybrid
+                                </div>
+                            </div>
+                            <label class="toggle-icon">
+                              <input type="checkbox" hidden>
+                              <i class="fa-regular fa-bookmark"></i>
+                              <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+                            </label>
+                        </div>
+                        <div class="job-card-body">
+                            <div class="job-tags">
+                                <span class="job-tag tag-salary">₹16 LPA</span>
+                                <span class="job-tag tag-type">Full-time</span>
+                                <span class="job-tag tag-experience">2-5 years</span>
+                            </div>
+                            <p class="job-description">
+                                Develop next-generation networking software and protocols. Work on cutting-edge network infrastructure that powers the internet.
+                            </p>
+                            <div class="job-skills">
+                                <span class="skill-tag">C/C++</span>
+                                <span class="skill-tag">Networking</span>
+                                <span class="skill-tag">TCP/IP</span>
+                                <span class="skill-tag">Linux</span>
+                                <span class="skill-tag">Python</span>
+                            </div>
+                            <div class="job-card-footer">
+                                <span class="job-posted">Posted 4 days ago</span>
+                                <div class="job-actions">
+                                    <a class="btn-details" href="#" target="_main">View Details</a>
+                                    <a class="btn-apply" href="#" target="_main">Apply Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Job Card 21: Darwinbox -->
+                    <div class="job-card">
+                        <div class="job-card-header">
+                            <div class="company-logo" style="background-image: url(https://images.saasworthy.com/darwinbox_8040_logo_1592804518_g2y1t.png); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+                            <div class="job-info">
+                                <h3 class="job-title">Full Stack Developer</h3>
+                                <p class="company-name">Darwinbox</p>
+                                <div class="job-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Hyderabad • Remote
+                                </div>
+                            </div>
+                            <label class="toggle-icon">
+                              <input type="checkbox" hidden>
+                              <i class="fa-regular fa-bookmark"></i>
+                              <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+                            </label>
+                        </div>
+                        <div class="job-card-body">
+                            <div class="job-tags">
+                                <span class="job-tag tag-salary">₹16 LPA</span>
+                                <span class="job-tag tag-type">Full-time</span>
+                                <span class="job-tag tag-experience">2-4 years</span>
+                                <!-- <span class="job-tag tag-remote">Remote</span> -->
+                            </div>
+                            <p class="job-description">
+                                Build scalable HR tech solutions that transform how companies manage their workforce. Work on modern web applications with cutting-edge technologies.
+                            </p>
+                            <div class="job-skills">
+                                <span class="skill-tag">React</span>
+                                <span class="skill-tag">Node.js</span>
+                                <span class="skill-tag">MongoDB</span>
+                                <!-- <span class="skill-tag">Express</span> -->
+                                <span class="skill-tag">TypeScript</span>
+                            </div>
+                            <div class="job-card-footer">
+                                <span class="job-posted">Posted 1 week ago</span>
+                                <div class="job-actions">
+                                    <a class="btn-details" href="#" target="_main">View Details</a>
+                                    <a class="btn-apply" href="#" target="_main">Apply Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Job Card 22: Thoughtworks -->
+                    <div class="job-card">
+                        <div class="job-card-header">
+                            <div class="company-logo" style="background-image: url(https://logowik.com/content/uploads/images/thoughtworks9829.jpg); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+                            <div class="job-info">
+                                <h3 class="job-title">Software Developer</h3>
+                                <p class="company-name">Thoughtworks</p>
+                                <div class="job-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Pune • Hybrid
+                                </div>
+                            </div>
+                            <label class="toggle-icon">
+                              <input type="checkbox" hidden>
+                              <i class="fa-regular fa-bookmark"></i>
+                              <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+                            </label>
+                        </div>
+                        <div class="job-card-body">
+                            <div class="job-tags">
+                                <span class="job-tag tag-salary">₹11.10 LPA</span>
+                                <span class="job-tag tag-type">Full-time</span>
+                                <span class="job-tag tag-experience">1-3 years</span>
+                            </div>
+                            <p class="job-description">
+                                Join a global technology consultancy that integrates strategy, design and engineering to drive digital innovation for forward-thinking companies.
+                            </p>
+                            <div class="job-skills">
+                                <span class="skill-tag">Java</span>
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">Agile</span>
+                                <span class="skill-tag">TDD</span>
+                                <span class="skill-tag">Microservices</span>
+                            </div>
+                            <div class="job-card-footer">
+                                <span class="job-posted">Posted 5 days ago</span>
+                                <div class="job-actions">
+                                    <a class="btn-details" href="#" target="_main">View Details</a>
+                                    <a class="btn-apply" href="#" target="_main">Apply Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Job Card 23: Fresh Bus -->
+                    <div class="job-card">
+                        <div class="job-card-header">
+                            <div class="company-logo" style="background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);">
+                                <span>FB</span>
+                            </div>
+                            <div class="job-info">
+                                <h3 class="job-title">Backend Developer</h3>
+                                <p class="company-name">Fresh Bus</p>
+                                <div class="job-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Bangalore • Remote
+                                </div>
+                            </div>
+                            <label class="toggle-icon">
+                              <input type="checkbox" hidden>
+                              <i class="fa-regular fa-bookmark"></i>
+                              <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+                            </label>
+                        </div>
+                        <div class="job-card-body">
+                            <div class="job-tags">
+                                <span class="job-tag tag-salary">₹10 LPA</span>
+                                <span class="job-tag tag-type">Full-time</span>
+                                <span class="job-tag tag-experience">2-4 years</span>
+                                <!-- <span class="job-tag tag-remote">Remote</span> -->
+                            </div>
+                            <p class="job-description">
+                                Build scalable backend systems for India's leading bus booking platform. Work with microservices architecture and handle millions of transactions.
+                            </p>
+                            <div class="job-skills">
+                                <span class="skill-tag">Node.js</span>
+                                <span class="skill-tag">MongoDB</span>
+                                <span class="skill-tag">Redis</span>
+                                <span class="skill-tag">AWS</span>
+                                <span class="skill-tag">Docker</span>
+                            </div>
+                            <div class="job-card-footer">
+                                <span class="job-posted">Posted 6 days ago</span>
+                                <div class="job-actions">
+                                    <a class="btn-details" href="#" target="_main">View Details</a>
+                                    <a class="btn-apply" href="#" target="_main">Apply Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Job Card 24: Synechron -->
+                    <div class="job-card">
+                        <div class="job-card-header">
+                            <div class="company-logo" style="background: linear-gradient(135deg, #0052cc 0%, #2684ff 100%);">
+                                <span>SY</span>
+                            </div>
+                            <div class="job-info">
+                                <h3 class="job-title">Java Developer</h3>
+                                <p class="company-name">Synechron</p>
+                                <div class="job-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Mumbai • On-site
+                                </div>
+                            </div>
+                            <label class="toggle-icon">
+                              <input type="checkbox" hidden>
+                              <i class="fa-regular fa-bookmark"></i>
+                              <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+                            </label>
+                        </div>
+                        <div class="job-card-body">
+                            <div class="job-tags">
+                                <span class="job-tag tag-salary">₹9 LPA</span>
+                                <span class="job-tag tag-type">Full-time</span>
+                                <span class="job-tag tag-experience">2-5 years</span>
+                            </div>
+                            <p class="job-description">
+                                Develop enterprise-grade financial technology solutions for global banks and financial institutions. Work with cutting-edge fintech technologies.
+                            </p>
+                            <div class="job-skills">
+                                <span class="skill-tag">Java</span>
+                                <span class="skill-tag">Spring Boot</span>
+                                <span class="skill-tag">Microservices</span>
+                                <!-- <span class="skill-tag">SQL</span> -->
+                                <span class="skill-tag">REST APIs</span>
+                            </div>
+                            <div class="job-card-footer">
+                                <span class="job-posted">Posted 1 week ago</span>
+                                <div class="job-actions">
+                                    <a class="btn-details" href="#" target="_main">View Details</a>
+                                    <a class="btn-apply" href="#" target="_main">Apply Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Job Card 25: Ball Corporation -->
+                    <div class="job-card">
+                        <div class="job-card-header">
+                            <div class="company-logo" style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);">
+                                <span>BC</span>
+                            </div>
+                            <div class="job-info">
+                                <h3 class="job-title">Software Engineer</h3>
+                                <p class="company-name">Ball Corporation</p>
+                                <div class="job-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Noida • Hybrid
+                                </div>
+                            </div>
+                            <label class="toggle-icon">
+                              <input type="checkbox" hidden>
+                              <i class="fa-regular fa-bookmark"></i>
+                              <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+                            </label>
+                        </div>
+                        <div class="job-card-body">
+                            <div class="job-tags">
+                                <span class="job-tag tag-salary">₹8.50 LPA</span>
+                                <span class="job-tag tag-type">Full-time</span>
+                                <span class="job-tag tag-experience">1-3 years</span>
+                            </div>
+                            <p class="job-description">
+                                Join a Fortune 500 company developing innovative packaging solutions. Work on industrial IoT and automation systems for manufacturing.
+                            </p>
+                            <div class="job-skills">
+                                <span class="skill-tag">C#</span>
+                                <span class="skill-tag">.NET</span>
+                                <span class="skill-tag">SQL Server</span>
+                                <span class="skill-tag">IoT</span>
+                                <span class="skill-tag">Azure</span>
+                            </div>
+                            <div class="job-card-footer">
+                                <span class="job-posted">Posted 3 days ago</span>
+                                <div class="job-actions">
+                                    <a class="btn-details" href="#" target="_main">View Details</a>
+                                    <a class="btn-apply" href="#" target="_main">Apply Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Job Card 26: HashedIn by Deloitte -->
+                    <div class="job-card">
+                        <div class="job-card-header">
+                            <div class="company-logo" style="background: linear-gradient(135deg, #86bc25 0%, #7cb518 100%);">
+                                <span>HD</span>
+                            </div>
+                            <div class="job-info">
+                                <h3 class="job-title">Full Stack Engineer</h3>
+                                <p class="company-name">HashedIn by Deloitte</p>
+                                <div class="job-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Bangalore • Hybrid
+                                </div>
+                            </div>
+                            <label class="toggle-icon">
+                              <input type="checkbox" hidden>
+                              <i class="fa-regular fa-bookmark"></i>
+                              <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+                            </label>
+                        </div>
+                        <div class="job-card-body">
+                            <div class="job-tags">
+                                <span class="job-tag tag-salary">₹8.10 LPA</span>
+                                <span class="job-tag tag-type">Full-time</span>
+                                <span class="job-tag tag-experience">1-4 years</span>
+                            </div>
+                            <p class="job-description">
+                                Build next-generation digital products for enterprise clients. Work with modern tech stack and agile methodologies in a consulting environment.
+                            </p>
+                            <div class="job-skills">
+                                <span class="skill-tag">React</span>
+                                <span class="skill-tag">Angular</span>
+                                <span class="skill-tag">Node.js</span>
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">AWS</span>
+                            </div>
+                            <div class="job-card-footer">
+                                <span class="job-posted">Posted 4 days ago</span>
+                                <div class="job-actions">
+                                    <a class="btn-details" href="#" target="_main">View Details</a>
+                                    <a class="btn-apply" href="#" target="_main">Apply Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Job Card 27: MyCaptain -->
+                    <div class="job-card">
+                        <div class="job-card-header">
+                            <div class="company-logo" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);">
+                                <span>MC</span>
+                            </div>
+                            <div class="job-info">
+                                <h3 class="job-title">Product Developer</h3>
+                                <p class="company-name">MyCaptain</p>
+                                <div class="job-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Mumbai • Remote
+                                </div>
+                            </div>
+                            <label class="toggle-icon">
+                              <input type="checkbox" hidden>
+                              <i class="fa-regular fa-bookmark"></i>
+                              <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+                            </label>
+                        </div>
+                        <div class="job-card-body">
+                            <div class="job-tags">
+                                <span class="job-tag tag-salary">₹7.45 LPA</span>
+                                <span class="job-tag tag-type">Full-time</span>
+                                <span class="job-tag tag-experience">1-3 years</span>
+                                <!-- <span class="job-tag tag-remote">Remote</span> -->
+                            </div>
+                            <p class="job-description">
+                                Build educational technology products that impact millions of students. Work on innovative learning platforms and mobile applications.
+                            </p>
+                            <div class="job-skills">
+                                <span class="skill-tag">React Native</span>
+                                <span class="skill-tag">Flutter</span>
+                                <!-- <span class="skill-tag">Firebase</span> -->
+                                <span class="skill-tag">Node.js</span>
+                                <span class="skill-tag">MongoDB</span>
+                            </div>
+                            <div class="job-card-footer">
+                                <span class="job-posted">Posted 2 days ago</span>
+                                <div class="job-actions">
+                                    <a class="btn-details" href="#" target="_main">View Details</a>
+                                    <a class="btn-apply" href="#" target="_main">Apply Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Job Card 28: TCS Digital -->
+                    <div class="job-card">
+                        <div class="job-card-header">
+                            <div class="company-logo" style="background: linear-gradient(135deg, #0f4c75 0%, #3282b8 100%);">
+                                <span>TCS</span>
+                            </div>
+                            <div class="job-info">
+                                <h3 class="job-title">Digital Software Engineer</h3>
+                                <p class="company-name">TCS Digital</p>
+                                <div class="job-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Chennai • On-site
+                                </div>
+                            </div>
+                            <label class="toggle-icon">
+                              <input type="checkbox" hidden>
+                              <i class="fa-regular fa-bookmark"></i>
+                              <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+                            </label>
+                        </div>
+                        <div class="job-card-body">
+                            <div class="job-tags">
+                                <span class="job-tag tag-salary">₹7.08 LPA</span>
+                                <span class="job-tag tag-type">Full-time</span>
+                                <span class="job-tag tag-experience">0-2 years</span>
+                            </div>
+                            <p class="job-description">
+                                Join TCS Digital to work on cutting-edge digital transformation projects for global clients. Opportunity to work with latest technologies and frameworks.
+                            </p>
+                            <div class="job-skills">
+                                <span class="skill-tag">Java</span>
+                                <span class="skill-tag">Angular</span>
+                                <span class="skill-tag">Spring</span>
+                                <span class="skill-tag">Microservices</span>
+                                <span class="skill-tag">Cloud</span>
+                            </div>
+                            <div class="job-card-footer">
+                                <span class="job-posted">Posted 1 day ago</span>
+                                <div class="job-actions">
+                                    <a class="btn-details" href="#" target="_main">View Details</a>
+                                    <a class="btn-apply" href="#" target="_main">Apply Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Job Card 29: DeltaX -->
+                    <div class="job-card">
+                        <div class="job-card-header">
+                            <div class="company-logo" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                <span>DX</span>
+                            </div>
+                            <div class="job-info">
+                                <h3 class="job-title">Software Developer</h3>
+                                <p class="company-name">DeltaX</p>
+                                <div class="job-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Gurgaon • Hybrid
+                                </div>
+                            </div>
+                            <label class="toggle-icon">
+                              <input type="checkbox" hidden>
+                              <i class="fa-regular fa-bookmark"></i>
+                              <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+                            </label>
+                        </div>
+                        <div class="job-card-body">
+                            <div class="job-tags">
+                                <span class="job-tag tag-salary">₹7 LPA</span>
+                                <span class="job-tag tag-type">Full-time</span>
+                                <span class="job-tag tag-experience">1-3 years</span>
+                            </div>
+                            <p class="job-description">
+                                Build programmatic advertising technology that serves billions of ad requests daily. Work with big data, machine learning, and real-time systems.
+                            </p>
+                            <div class="job-skills">
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">Scala</span>
+                                <span class="skill-tag">Kafka</span>
+                                <span class="skill-tag">Spark</span>
+                                <span class="skill-tag">ML </span>
+                            </div>
+                            <div class="job-card-footer">
+                                <span class="job-posted">Posted 5 days ago</span>
+                                <div class="job-actions">
+                                    <a class="btn-details" href="#" target="_main">View Details</a>
+                                    <a class="btn-apply" href="#" target="_main">Apply Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Job Card 30: PELATRO -->
+                    <div class="job-card">
+                        <div class="job-card-header">
+                            <div class="company-logo" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                <span>PE</span>
+                            </div>
+                            <div class="job-info">
+                                <h3 class="job-title">Backend Engineer</h3>
+                                <p class="company-name">PELATRO</p>
+                                <div class="job-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Bangalore • On-site
+                                </div>
+                            </div>
+                            <label class="toggle-icon">
+                              <input type="checkbox" hidden>
+                              <i class="fa-regular fa-bookmark"></i>
+                              <i class="fa-solid fa-bookmark" style="color: #008000;"></i>
+                            </label>
+                        </div>
+                        <div class="job-card-body">
+                            <div class="job-tags">
+                                <span class="job-tag tag-salary">₹6.5 LPA</span>
+                                <span class="job-tag tag-type">Full-time</span>
+                                <span class="job-tag tag-experience">1-3 years</span>
+                            </div>
+                            <p class="job-description">
+                                Develop telecom analytics and customer intelligence solutions. Work with big data processing and real-time analytics for telecom operators.
+                            </p>
+                            <div class="job-skills">
+                                <span class="skill-tag">Java</span>
+                                <span class="skill-tag">Hadoop</span>
+                                <span class="skill-tag">Spark</span>
+                                <span class="skill-tag">Kafka</span>
+                                <span class="skill-tag">Big Data</span>
+                            </div>
+                            <div class="job-card-footer">
+                                <span class="job-posted">Posted 1 week ago</span>
+                                <div class="job-actions">
+                                    <a class="btn-details" href="#" target="_main">View Details</a>
+                                    <a class="btn-apply" href="#" target="_main">Apply Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            <!-- Load More Section -->
+            <div class="load-more">
+                <button class="load-more-btn">
+                    <i class="fas fa-plus"></i>
+                    Load More Jobs
+                </button>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Engineering Intern - Google | CareerNest</title>
+    <meta name="description" content="Join Google's world-class engineering team as an intern. Work on products used by billions of users and learn from the best engineers.">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #3b82f6;
+            --secondary-color: #059669;
+            --accent-color: #dc2626;
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --text-light: #9ca3af;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --bg-tertiary: #f3f4f6;
+            --border-color: #e5e7eb;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-color);
+            text-decoration: none;
+            margin-bottom: 32px;
+            font-weight: 600;
+            padding: 12px 20px;
+            border-radius: 12px;
+            background: rgba(37, 99, 235, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(37, 99, 235, 0.15);
+            transform: translateX(-4px);
+        }
+
+        /* Job Detail Container */
+        .job-detail-container {
+            background: var(--bg-primary);
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* New Clean Job Header */
+        .job-header {
+            padding: 40px 40px 20px 40px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .job-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .company-name {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            font-weight: 500;
+        }
+
+        /* Job Meta Information */
+        .job-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .meta-item i {
+            color: var(--primary-color);
+            font-size: 1rem;
+            width: 16px;
+            text-align: center;
+        }
+
+        /* Action Buttons Row */
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-bottom: 20px;
+        }
+
+        .action-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-apply {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-apply:hover {
+            background-color: #218838;
+            transform: translateY(-1px);
+        }
+
+        .btn-calendar {
+            background-color: #fd7e14;
+            color: white;
+        }
+
+        .btn-calendar:hover {
+            background-color: #e8690b;
+            transform: translateY(-1px);
+        }
+
+        .btn-reminder {
+            background-color: #6f42c1;
+            color: white;
+        }
+
+        .btn-reminder:hover {
+            background-color: #5a359a;
+            transform: translateY(-1px);
+        }
+
+        .btn-mock {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-mock:hover {
+            background-color: #c82333;
+            transform: translateY(-1px);
+        }
+
+        .btn-questions {
+            background-color: #495057;
+            color: white;
+        }
+
+        .btn-questions:hover {
+            background-color: #343a40;
+            transform: translateY(-1px);
+        }
+
+        .btn-save {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-save:hover {
+            background-color: #5a6268;
+            transform: translateY(-1px);
+        }
+
+        /* Content Sections */
+        .content-sections {
+            padding: 40px;
+        }
+
+        .job-section {
+            margin-bottom: 40px;
+        }
+
+        .job-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .section-content {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        /* Requirements List */
+        .requirements-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .requirements-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .requirements-list li:hover {
+            background: var(--bg-secondary);
+            padding-left: 16px;
+            border-radius: 8px;
+        }
+
+        .requirements-list li:last-child {
+            border-bottom: none;
+        }
+
+        .requirements-list li::before {
+            content: "✓";
+            color: var(--success-color);
+            font-weight: bold;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Eligibility Tags */
+        .eligibility-tags {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .eligibility-tag {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+            color: var(--success-color);
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        .eligibility-tag:hover {
+            background: var(--success-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Skills Tags */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+        }
+
+        .skill-tag {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Compensation Box */
+        .compensation-box {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 16px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .compensation-amount {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--success-color);
+            margin-bottom: 6px;
+        }
+
+        .compensation-period {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Process Steps */
+        .process-steps {
+            display: grid;
+            gap: 16px;
+        }
+
+        .process-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .step-number {
+            background: var(--primary-color);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        /* Benefits Grid */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .benefit-item:hover {
+            background: rgba(37, 99, 235, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .benefit-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .main-container {
+                padding: 20px 16px;
+            }
+
+            .job-header {
+                padding: 24px 24px 16px 24px;
+            }
+
+            .job-title {
+                font-size: 2rem;
+            }
+
+            .company-name {
+                font-size: 1.1rem;
+            }
+
+            .job-meta {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .action-btn {
+                justify-content: center;
+            }
+
+            .content-sections {
+                padding: 24px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .eligibility-tags {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .job-title {
+                font-size: 1.75rem;
+            }
+
+            .section-title {
+                font-size: 1.25rem;
+            }
+
+            .compensation-amount {
+                font-size: 1.5rem;
+            }
+
+            .action-buttons {
+                gap: 8px;
+            }
+
+            .action-btn {
+                padding: 10px 16px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <a href="../jobs.html" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            Back to Jobs
+        </a>
+
+        <div class="job-detail-container">
+            <!-- Job Header -->
+            <div class="job-header">
+                <h1 class="job-title">Cisco Ideathon - Software Engineering Intern</h1>
+                <div class="company-name">Cisco</div>
+                
+                <div class="job-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Internship</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Bangalore, India</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Deadline: 15/8/2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-clock"></i>
+                        <span>8-12 weeks</span>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <a href="#" class="action-btn btn-apply">
+                        <i class="fas fa-paper-plane"></i>
+                        Apply Now
+                    </a>
+                    <a href="#" class="action-btn btn-calendar">
+                        <i class="fas fa-calendar-plus"></i>
+                        Add to Calendar
+                    </a>
+                    <a href="#" class="action-btn btn-reminder">
+                        <i class="fas fa-bell"></i>
+                        Set Reminder
+                    </a>
+                    <a href="#" class="action-btn btn-mock">
+                        <i class="fas fa-brain"></i>
+                        Mock Tests
+                    </a>
+                    <a href="#" class="action-btn btn-questions">
+                        <i class="fas fa-question-circle"></i>
+                        Previous Questions
+                    </a>
+                    <a href="#" class="action-btn btn-save">
+                        <i class="fas fa-bookmark"></i>
+                        Save Job
+                    </a>
+                </div>
+            </div>
+
+            <!-- Content Sections -->
+            <div class="content-sections">
+                <!-- Description -->
+                <div class="job-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-info-circle"></i>
+                        Job Description
+                    </h2>
+                    <div class="section-content">
+                        <p>Cisco Ideathon is a unique opportunity for final-year students to secure an internship with Cisco through a national innovation challenge. This program combines ideation, technical mentorship, and final interviews leading to internship and potential PPO offers.</p>
+                        <p>As a Software Engineering Intern, you'll work with Cisco's engineering teams on cutting-edge technologies including networking, automation, cloud, and cybersecurity.</p>
+                        <p>Ideathon encourages creative thinking, problem-solving, and hands-on development, offering a fast track to a future career at Cisco.</p>
+                    </div>
+                </div>
+
+                <!-- Requirements -->
+                <div class="job-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-list-check"></i>
+                        Requirements
+                    </h2>
+                    <div class="section-content">
+                        <ul class="requirements-list">
+                            <li>Currently pursuing final year of B.E/B.Tech in Computer Science, IT, or related fields</li>
+                            <li>Strong understanding of programming fundamentals and computer networks</li>
+                            <li>Proficient in languages like Python, Java, or C++</li>
+                            <li>Basic understanding of Data Structures & Algorithms</li>
+                            <li>Passionate about solving real-world problems with technology</li>
+                            <li>Strong teamwork, communication, and innovation skills</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Skills -->
+                <div class="job-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-code"></i>
+                        Required Skills
+                    </h2>
+                    <div class="section-content">
+                        <div class="skills-grid">
+                            <div class="skill-tag">Python</div>
+                            <div class="skill-tag">Java</div>
+                            <div class="skill-tag">C++</div>
+                            <div class="skill-tag">Networking</div>
+                            <div class="skill-tag">Cloud</div>
+                            <div class="skill-tag">Cybersecurity</div>
+                            <div class="skill-tag">Git</div>
+                            <div class="skill-tag">Linux</div>
+                            <div class="skill-tag">Problem Solving</div>
+                            <div class="skill-tag">REST APIs</div>
+                            <div class="skill-tag">DSA</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Eligibility -->
+                <div class="job-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-graduation-cap"></i>
+                        Eligibility
+                    </h2>
+                    <div class="section-content">
+                        <div class="eligibility-tags">
+                            <div class="eligibility-tag">Class of 2025</div>
+                            <div class="eligibility-tag">Final Year UG Students</div>
+                            <div class="eligibility-tag">Cisco Ideathon Shortlisted</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Compensation -->
+                <div class="job-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-money-bill-wave"></i>
+                        Compensation
+                    </h2>
+                    <div class="section-content">
+                        <div class="compensation-box">
+                            <div class="compensation-amount">₹75,000 per month</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Application Process -->
+                <div class="job-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-route"></i>
+                        Application Process
+                    </h2>
+                    <div class="section-content">
+                        <div class="process-steps">
+                            <div class="process-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <div class="step-title">Online Ideathon Registration</div>
+                                    <div>Register through Cisco Ideathon portal with your resume and details.</div>
+                                </div>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <div class="step-title">Problem Statement Submission</div>
+                                    <div>Submit your idea and technical solution to real-world problems.</div>
+                                </div>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <div class="step-title">Interview Rounds</div>
+                                    <div>Shortlisted teams undergo technical + HR interviews.</div>
+                                </div>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <div class="step-title">Internship Offer</div>
+                                    <div>Selected students receive internship with potential PPO.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Benefits -->
+                <div class="job-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-star"></i>
+                        Benefits & Perks
+                    </h2>
+                    <div class="section-content">
+                        <div class="benefits-grid">
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div>
+                                    <strong>Innovation Challenge</strong><br>
+                                    Compete with top talent across India
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <div>
+                                    <strong>Mentorship</strong><br>
+                                    Guidance from Cisco professionals
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <div>
+                                    <strong>Internship Opportunity</strong><br>
+                                    Work with Cisco's top engineering teams
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <div>
+                                    <strong>Global Exposure</strong><br>
+                                    Learn at a Fortune 100 company
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-certificate"></i>
+                                </div>
+                                <div>
+                                    <strong>Pre-Placement Offer</strong><br>
+                                    PPO for top interns
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+</html>

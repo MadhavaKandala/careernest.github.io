@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Technical Round Practice | InterviewMaster</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+          font-family: 'Inter', sans-serif;
+          background-color: #f9fafb;
+        color: #374151;
+        line-height: 1.6;
+      }
+      
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      
+      /* Header Styles */
+      .header {
+        background-color: white;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      
+      .header-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 24px;
+        border-bottom: 1px solid #e5e7eb;
+      }
+      
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      
+      .back-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: white;
+        border-radius: 50%;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+          color: #6b7280;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+      
+      .back-btn:hover {
+        background-color: #f9fafb;
+        color: #4f46e5;
+      }
+      
+      .logo {
+        font-family: 'Pacifico', cursive;
+        font-size: 24px;
+        color: #4f46e5;
+        text-decoration: none;
+      }
+      
+      .logo-img {
+        height: 40px;
+      }
+      
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+          cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      
+      .btn-primary {
+          background-color: #4f46e5;
+        color: white;
+      }
+      
+      .btn-primary:hover {
+        background-color: #4338ca;
+      }
+      
+      .btn-secondary {
+          background-color: white;
+        color: #374151;
+        border: 1px solid #d1d5db;
+      }
+      
+      .btn-secondary:hover {
+        background-color: #f9fafb;
+      }
+      
+      /* Main Content */
+      .main {
+        padding: 32px 0;
+      }
+      
+      .page-header {
+        margin-bottom: 32px;
+      }
+      
+      .page-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 8px;
+      }
+      
+      .page-subtitle {
+        font-size: 16px;
+        color: #6b7280;
+      }
+      
+      /* Layout */
+      .content-layout {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 32px;
+        margin-bottom: 32px;
+      }
+      
+      /* Sidebar */
+      .sidebar {
+          background-color: white;
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        height: fit-content;
+      }
+      
+      .sidebar-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #111827;
+        margin-bottom: 20px;
+      }
+      
+      .question-list {
+        list-style: none;
+      }
+      
+      .question-item {
+        padding: 12px 16px;
+        border-radius: 8px;
+        margin-bottom: 8px;
+          cursor: pointer;
+        transition: all 0.3s ease;
+        border: 1px solid transparent;
+      }
+      
+      .question-item:hover {
+        background-color: #f8fafc;
+        border-color: #e5e7eb;
+      }
+      
+      .question-item.active {
+        background-color: #eef2ff;
+          border-color: #4f46e5;
+        color: #4f46e5;
+      }
+      
+      .question-number {
+        font-weight: 500;
+        margin-bottom: 4px;
+      }
+      
+      .question-title {
+        font-size: 14px;
+        color: #6b7280;
+      }
+      
+      .question-item.active .question-title {
+        color: #4f46e5;
+      }
+      
+      /* Main Content Area */
+      .main-content {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+      
+      .content-header {
+        padding: 24px;
+        border-bottom: 1px solid #e5e7eb;
+        background-color: #f8fafc;
+      }
+      
+      .question-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 16px;
+      }
+      
+      .question-info h2 {
+        font-size: 20px;
+        font-weight: 600;
+        color: #111827;
+        margin-bottom: 8px;
+      }
+      
+      .question-meta {
+        display: flex;
+        gap: 16px;
+        font-size: 14px;
+          color: #6b7280;
+      }
+      
+      .difficulty-badge {
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 500;
+      }
+      
+      .difficulty-medium {
+          background-color: #fef3c7;
+        color: #d97706;
+      }
+      
+      .difficulty-hard {
+          background-color: #fee2e2;
+        color: #dc2626;
+      }
+      
+      .difficulty-easy {
+        background-color: #dcfce7;
+        color: #16a34a;
+      }
+      
+      .timer {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        color: #6b7280;
+      }
+      
+      .timer-icon {
+        color: #ef4444;
+      }
+      
+      /* Question Content */
+      .question-content {
+        padding: 24px;
+      }
+      
+      .question-description {
+        font-size: 16px;
+        color: #374151;
+        line-height: 1.6;
+        margin-bottom: 24px;
+      }
+      
+      .code-example {
+        background-color: #1f2937;
+        color: #f9fafb;
+        padding: 20px;
+        border-radius: 8px;
+        font-family: 'Fira Code', monospace;
+        font-size: 14px;
+        line-height: 1.5;
+        margin-bottom: 24px;
+        overflow-x: auto;
+      }
+      
+      /* Code Editor */
+      .code-editor-section {
+        margin-bottom: 24px;
+      }
+      
+      .editor-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      
+      .editor-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #111827;
+      }
+      
+      .language-selector {
+        display: flex;
+        gap: 8px;
+      }
+      
+      .lang-btn {
+        padding: 6px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        background-color: white;
+        color: #6b7280;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      
+      .lang-btn.active {
+        background-color: #4f46e5;
+        color: white;
+        border-color: #4f46e5;
+      }
+      
+      .code-editor {
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: #1f2937;
+      }
+      
+      .editor-toolbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 16px;
+        background-color: #374151;
+        border-bottom: 1px solid #4b5563;
+      }
+      
+      .editor-controls {
+        display: flex;
+        gap: 12px;
+      }
+      
+      .control-btn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        border: none;
+        border-radius: 4px;
+        background-color: #4b5563;
+        color: #f9fafb;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      
+      .control-btn:hover {
+        background-color: #6b7280;
+      }
+      
+      .editor-content {
+        display: flex;
+        min-height: 300px;
+      }
+      
+      .line-numbers {
+        padding: 16px 12px;
+        background-color: #111827;
+        color: #6b7280;
+        font-family: 'Fira Code', monospace;
+        font-size: 14px;
+        line-height: 1.5;
+        user-select: none;
+        border-right: 1px solid #374151;
+      }
+      
+      .code-area {
+        flex: 1;
+        padding: 16px;
+        background-color: #1f2937;
+        color: #f9fafb;
+        font-family: 'Fira Code', monospace;
+        font-size: 14px;
+        line-height: 1.5;
+        border: none;
+        outline: none;
+        resize: vertical;
+        min-height: 300px;
+      }
+      
+      /* Test Cases */
+      .test-cases {
+        margin-bottom: 24px;
+      }
+      
+      .test-cases h3 {
+        font-size: 16px;
+        font-weight: 600;
+        color: #111827;
+        margin-bottom: 16px;
+      }
+      
+      .test-case {
+        background-color: #f8fafc;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 16px;
+        margin-bottom: 12px;
+      }
+      
+      .test-case-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+      
+      .test-case-title {
+        font-size: 14px;
+        font-weight: 500;
+        color: #111827;
+      }
+      
+      .test-case-status {
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 500;
+      }
+      
+      .status-passed {
+        background-color: #dcfce7;
+        color: #16a34a;
+      }
+      
+      .status-failed {
+        background-color: #fee2e2;
+        color: #dc2626;
+      }
+      
+      .status-pending {
+        background-color: #f3f4f6;
+        color: #6b7280;
+      }
+      
+      .test-case-content {
+        font-size: 14px;
+        color: #6b7280;
+        font-family: 'Fira Code', monospace;
+      }
+      
+      /* Action Buttons */
+      .action-buttons {
+        display: flex;
+        gap: 12px;
+        padding: 24px;
+        border-top: 1px solid #e5e7eb;
+        background-color: #f8fafc;
+      }
+      
+      .btn-large {
+        padding: 12px 24px;
+        font-size: 16px;
+      }
+      
+      /* Progress Section */
+      .progress-section {
+        background-color: white;
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+      
+      .progress-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+      
+      .progress-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #111827;
+      }
+      
+      .progress-stats {
+        display: flex;
+        gap: 24px;
+      }
+      
+      .stat-item {
+        text-align: center;
+      }
+      
+      .stat-value {
+        font-size: 24px;
+        font-weight: 700;
+        color: #4f46e5;
+      }
+      
+      .stat-label {
+        font-size: 12px;
+        color: #6b7280;
+        margin-top: 4px;
+      }
+      
+      .progress-bar {
+        width: 100%;
+        height: 8px;
+        background-color: #e5e7eb;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 12px;
+      }
+      
+      .progress-fill {
+        height: 100%;
+        background-color: #4f46e5;
+        border-radius: 4px;
+        transition: width 0.3s ease;
+      }
+      
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        .content-layout {
+          grid-template-columns: 1fr;
+        }
+        
+        .sidebar {
+          order: 2;
+        }
+        
+        .main-content {
+          order: 1;
+        }
+      }
+      
+      @media (max-width: 768px) {
+        .question-header {
+          flex-direction: column;
+          gap: 12px;
+        }
+        
+        .question-meta {
+          flex-wrap: wrap;
+        }
+        
+        .action-buttons {
+          flex-direction: column;
+        }
+        
+        .progress-stats {
+          flex-wrap: wrap;
+          gap: 16px;
+        }
+      }
+      
+      .logo-text {
+        font-family: 'Pacifico', cursive;
+        font-size: 1.5rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #6366f1 0%, #6d28d9 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        letter-spacing: 0.5px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Navigation -->
+    <header class="header">
+      <div class="header-content">
+        <div class="header-left">
+          <a href="interview.html" class="back-btn">
+            <i class="ri-arrow-left-line"></i>
+          </a>
+          <a href="#" class="logo"><span class="logo-text">CareerNest</span></a>
+                    </div>
+        <div class="header-actions">
+          <a href="#" class="btn btn-secondary">Save Progress</a>
+          <a href="#" class="btn btn-primary">Submit Solution</a>
+                  </div>
+                  </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+      <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+          <h1 class="page-title">Technical Round Practice</h1>
+          <p class="page-subtitle">
+            Practice coding challenges and improve your problem-solving skills
+          </p>
+              </div>
+
+        <!-- Content Layout -->
+        <div class="content-layout">
+          <!-- Sidebar -->
+          <div class="sidebar">
+            <h2 class="sidebar-title">Practice Questions</h2>
+            <ul class="question-list">
+              <li class="question-item active">
+                <div class="question-number">Question 1</div>
+                <div class="question-title">Two Sum</div>
+              </li>
+              <li class="question-item">
+                <div class="question-number">Question 2</div>
+                <div class="question-title">Valid Parentheses</div>
+              </li>
+              <li class="question-item">
+                <div class="question-number">Question 3</div>
+                <div class="question-title">Reverse String</div>
+              </li>
+              <li class="question-item">
+                <div class="question-number">Question 4</div>
+                <div class="question-title">Palindrome Number</div>
+              </li>
+              <li class="question-item">
+                <div class="question-number">Question 5</div>
+                <div class="question-title">Merge Two Lists</div>
+              </li>
+            </ul>
+              </div>
+
+          <!-- Main Content Area -->
+          <div class="main-content">
+            <!-- Question Header -->
+            <div class="content-header">
+              <div class="question-header">
+                <div class="question-info">
+                  <h2>Two Sum</h2>
+                  <div class="question-meta">
+                    <span>Array</span>
+                    <span>Hash Table</span>
+                        <span>Easy</span>
+                    </div>
+                  </div>
+                <div class="difficulty-badge difficulty-easy">Easy</div>
+                  </div>
+              <div class="timer">
+                <i class="ri-time-line timer-icon"></i>
+                <span>Time: 15:30</span>
+                </div>
+              </div>
+
+            <!-- Question Content -->
+            <div class="question-content">
+              <div class="question-description">
+                <p>Given an array of integers <code>nums</code> and an integer <code>target</code>, return <em>indices of the two numbers such that they add up to <code>target</code></em>.</p>
+                <p>You may assume that each input would have <strong>exactly one solution</strong>, and you may not use the <em>same</em> element twice.</p>
+                <p>You can return the answer in any order.</p>
+              </div>
+
+              <div class="code-example">
+                <strong>Example 1:</strong><br>
+                <strong>Input:</strong> nums = [2,7,11,15], target = 9<br>
+                <strong>Output:</strong> [0,1]<br>
+                <strong>Explanation:</strong> Because nums[0] + nums[1] == 9, we return [0, 1].<br><br>
+                <strong>Example 2:</strong><br>
+                <strong>Input:</strong> nums = [3,2,4], target = 6<br>
+                <strong>Output:</strong> [1,2]<br><br>
+                <strong>Example 3:</strong><br>
+                <strong>Input:</strong> nums = [3,3], target = 6<br>
+                <strong>Output:</strong> [0,1]
+              </div>
+
+              <!-- Code Editor -->
+              <div class="code-editor-section">
+                <div class="editor-header">
+                  <h3 class="editor-title">Your Solution</h3>
+                  <div class="language-selector">
+                    <button class="lang-btn active">JavaScript</button>
+                    <button class="lang-btn">Python</button>
+                    <button class="lang-btn">Java</button>
+                    </div>
+                  </div>
+                <div class="code-editor">
+                  <div class="editor-toolbar">
+                    <div class="editor-controls">
+                      <button class="control-btn">
+                        <i class="ri-play-line"></i>
+                        Run
+                      </button>
+                      <button class="control-btn">
+                        <i class="ri-refresh-line"></i>
+                        Reset
+                      </button>
+                  </div>
+                    <div class="editor-controls">
+                      <button class="control-btn">
+                        <i class="ri-settings-line"></i>
+                        Settings
+                      </button>
+                </div>
+              </div>
+                  <div class="editor-content">
+                    <div class="line-numbers">
+                      1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15
+            </div>
+                    <textarea class="code-area" placeholder="// Write your solution here
+function twoSum(nums, target) {
+    // Your code here
+}
+
+// Test cases
+console.log(twoSum([2,7,11,15], 9)); // Expected: [0,1]
+console.log(twoSum([3,2,4], 6)); // Expected: [1,2]
+console.log(twoSum([3,3], 6)); // Expected: [0,1]"></textarea>
+                </div>
+                </div>
+              </div>
+
+              <!-- Test Cases -->
+              <div class="test-cases">
+                <h3>Test Cases</h3>
+                <div class="test-case">
+                  <div class="test-case-header">
+                    <span class="test-case-title">Test Case 1</span>
+                    <span class="test-case-status status-passed">Passed</span>
+                </div>
+                  <div class="test-case-content">
+                    Input: nums = [2,7,11,15], target = 9<br>
+                    Expected: [0,1]<br>
+                    Output: [0,1] ✓
+                </div>
+                </div>
+                <div class="test-case">
+                  <div class="test-case-header">
+                    <span class="test-case-title">Test Case 2</span>
+                    <span class="test-case-status status-passed">Passed</span>
+              </div>
+                  <div class="test-case-content">
+                    Input: nums = [3,2,4], target = 6<br>
+                    Expected: [1,2]<br>
+                    Output: [1,2] ✓
+                </div>
+                </div>
+                <div class="test-case">
+                  <div class="test-case-header">
+                    <span class="test-case-title">Test Case 3</span>
+                    <span class="test-case-status status-pending">Pending</span>
+                </div>
+                  <div class="test-case-content">
+                    Input: nums = [3,3], target = 6<br>
+                    Expected: [0,1]<br>
+                    Output: Not run yet
+              </div>
+            </div>
+            </div>
+          </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+              <button class="btn btn-secondary btn-large">
+                <i class="ri-refresh-line"></i>
+                Reset Code
+              </button>
+              <button class="btn btn-secondary btn-large">
+                <i class="ri-play-line"></i>
+                Run Tests
+              </button>
+              <button class="btn btn-primary btn-large">
+                <i class="ri-check-line"></i>
+                Submit Solution
+              </button>
+                    </div>
+                  </div>
+                  </div>
+
+        <!-- Progress Section -->
+        <div class="progress-section">
+          <div class="progress-header">
+            <h2 class="progress-title">Your Progress</h2>
+            <div class="progress-stats">
+              <div class="stat-item">
+                <div class="stat-value">12</div>
+                <div class="stat-label">Solved</div>
+                    </div>
+              <div class="stat-item">
+                <div class="stat-value">85%</div>
+                <div class="stat-label">Success Rate</div>
+                  </div>
+              <div class="stat-item">
+                <div class="stat-value">45</div>
+                <div class="stat-label">Total Questions</div>
+                  </div>
+                </div>
+                    </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 27%"></div>
+                  </div>
+          <div style="text-align: center; color: #6b7280; font-size: 14px;">
+            12 of 45 questions completed
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
