@@ -274,15 +274,14 @@
 <div id="login-modal" class="modal">
 <a href="#" class="modal-overlay"></a>
 <div class="modal-container">
-<div class="modal-header" style="flex-direction: column; align-items: stretch;">
-<div style="display: flex; justify-content: space-between; align-items: center;">
-<div style="display: flex; width: 100%;">
-<button id="login-tab" type="button" onclick="showLogin(); return false;" style="flex:1; border:none; background:none; font-size:1.1rem; font-weight:600; padding:0.5rem 0; color:var(--primary-color); border-bottom:2px solid var(--primary-color); transition:all 0.2s;">Login</button>
-<button id="signup-tab" type="button" onclick="showSignup(); return false;" style="flex:1; border:none; background:none; font-size:1.1rem; font-weight:600; padding:0.5rem 0; color:#6B7280; border-bottom:2px solid transparent; transition:all 0.2s;">Sign Up</button>
+<div class="modal-header">
+<h3 id="modal-title">Login to CareerNest</h3>
+<a href="#" class="close-modal"><i class="ri-close-line"></i></a>
 </div>
-<a href="#" class="close-modal" style="margin-left: 1rem;"><i class="ri-close-line"></i></a>
-</div>
-<h3 id="modal-title" style="margin-top:1rem; margin-bottom:0.5rem; text-align:center;">Login to CareerNest</h3>
+<!-- Tab Navigation -->
+<div style="display: flex; justify-content: center; margin-bottom: 1.5rem; gap: 1rem;">
+  <button id="login-tab" onclick="showLogin(); return false;" style="background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--primary-color); border-bottom: 2px solid var(--primary-color); padding: 0.5rem 1.5rem; cursor: pointer; transition: color 0.2s, border-bottom 0.2s;">Login</button>
+  <button id="signup-tab" onclick="showSignup(); return false;" style="background: none; border: none; font-size: 1.1rem; font-weight: 600; color: #9CA3AF; border-bottom: 2px solid transparent; padding: 0.5rem 1.5rem; cursor: pointer; transition: color 0.2s, border-bottom 0.2s;">Sign Up</button>
 </div>
 <!-- Login Form -->
 <form action="dashboard.html" class="login-form" id="login-form">
@@ -303,7 +302,7 @@
 </div>
 <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
 <div style="text-align:center; margin-top:1rem;">
-<span style="color:#6B7280; font-size:0.95rem;">Don't have an account? <a href="#" onclick="showSignup(); return false;" style="color:var(--primary-color); cursor:pointer; text-decoration:none;">Sign Up for Free</a></span>
+<a href="#" onclick="showSignup(); return false;" style="color:var(--primary-color); cursor:pointer; font-size:0.95rem; text-decoration:none;">Don't have an account? <b>Sign Up for Free</b></a>
 </div>
 </form>
 <!-- Sign Up Form -->
@@ -322,63 +321,63 @@
 </div>
 <button type="submit" class="btn btn-primary" style="width: 100%;">Sign Up &rarr;</button>
 <div style="text-align:center; margin-top:1rem;">
-<span style="color:#6B7280; font-size:0.95rem;">Already have an account? <a href="#" onclick="showLogin(); return false;" style="color:var(--primary-color); cursor:pointer; text-decoration:none;">Login</a></span>
+<a href="#" onclick="showLogin(); return false;" style="color:var(--primary-color); cursor:pointer; font-size:0.95rem; text-decoration:none;">Already have an account? <b>Login</b></a>
 </div>
 </form>
 <script>
-function setTab(active) {
-  var loginTab = document.getElementById('login-tab');
-  var signupTab = document.getElementById('signup-tab');
-  if (active === 'login') {
-    loginTab.style.color = 'var(--primary-color)';
-    loginTab.style.borderBottom = '2px solid var(--primary-color)';
-    signupTab.style.color = '#6B7280';
-    signupTab.style.borderBottom = '2px solid transparent';
-  } else {
-    signupTab.style.color = 'var(--primary-color)';
-    signupTab.style.borderBottom = '2px solid var(--primary-color)';
-    loginTab.style.color = '#6B7280';
-    loginTab.style.borderBottom = '2px solid transparent';
+  function setActiveTab(tab) {
+    var loginTab = document.getElementById('login-tab');
+    var signupTab = document.getElementById('signup-tab');
+    if(tab === 'login') {
+      loginTab.style.color = 'var(--primary-color)';
+      loginTab.style.borderBottom = '2px solid var(--primary-color)';
+      signupTab.style.color = '#9CA3AF';
+      signupTab.style.borderBottom = '2px solid transparent';
+    } else {
+      signupTab.style.color = 'var(--primary-color)';
+      signupTab.style.borderBottom = '2px solid var(--primary-color)';
+      loginTab.style.color = '#9CA3AF';
+      loginTab.style.borderBottom = '2px solid transparent';
+    }
   }
-}
-function showSignup() {
-  document.getElementById('login-form').style.display = 'none';
-  document.getElementById('signup-form').style.display = 'flex';
-  document.getElementById('signup-form').style.flexDirection = 'column';
-  document.getElementById('signup-form').style.gap = '1rem';
-  document.getElementById('modal-title').textContent = 'Sign Up for Free';
-  setTab('signup');
-}
-function showLogin() {
-  document.getElementById('signup-form').style.display = 'none';
-  document.getElementById('login-form').style.display = 'flex';
-  document.getElementById('login-form').style.flexDirection = 'column';
-  document.getElementById('login-form').style.gap = '1rem';
-  document.getElementById('modal-title').textContent = 'Login to CareerNest';
-  setTab('login');
-}
-document.addEventListener('DOMContentLoaded', function() {
-  // Close modal when clicking overlay
-  document.querySelector('.modal-overlay').addEventListener('click', function(e) {
-    e.preventDefault();
-    window.location.hash = '';
-  });
-  // Close modal when clicking close button
-  document.querySelector('.close-modal').addEventListener('click', function(e) {
-    e.preventDefault();
-    window.location.hash = '';
-  });
-  // Close modal when pressing Escape key
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && window.location.hash === '#login-modal') {
+  function showSignup() {
+    document.getElementById('login-form').style.display = 'none';
+    document.getElementById('signup-form').style.display = 'flex';
+    document.getElementById('signup-form').style.flexDirection = 'column';
+    document.getElementById('signup-form').style.gap = '1rem';
+    document.getElementById('modal-title').textContent = 'Sign Up for Free';
+    setActiveTab('signup');
+  }
+  function showLogin() {
+    document.getElementById('signup-form').style.display = 'none';
+    document.getElementById('login-form').style.display = 'flex';
+    document.getElementById('login-form').style.flexDirection = 'column';
+    document.getElementById('login-form').style.gap = '1rem';
+    document.getElementById('modal-title').textContent = 'Login to CareerNest';
+    setActiveTab('login');
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    // Close modal when clicking overlay
+    document.querySelector('.modal-overlay').addEventListener('click', function(e) {
+      e.preventDefault();
       window.location.hash = '';
+    });
+    // Close modal when clicking close button
+    document.querySelector('.close-modal').addEventListener('click', function(e) {
+      e.preventDefault();
+      window.location.hash = '';
+    });
+    // Close modal when pressing Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && window.location.hash === '#login-modal') {
+        window.location.hash = '';
+      }
+    });
+    // Reset form display when modal opens
+    if (window.location.hash === '#login-modal') {
+      showLogin();
     }
   });
-  // Reset form display when modal opens
-  if (window.location.hash === '#login-modal') {
-    showLogin();
-  }
-});
 </script>
 </div>
 </div>
