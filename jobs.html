@@ -162,10 +162,11 @@
             font-weight: 900;
             color: var(--text-primary);
             margin-bottom: 16px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            background: linear-gradient(90deg, #1CB5E0 0%, #000851 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-fill-color: transparent;
         }
 
         .jobs-subtitle {
@@ -393,7 +394,7 @@
             align-items: center;
             gap: 8px;
         }
-*/
+
         .filter-group {
             margin-bottom: 32px;
         }
@@ -976,9 +977,129 @@
             padding: 0.6rem 1rem;
           }
         }
+        @media (min-width: 701px) {
+          /* .floating-profile { display: none !important; } */
+          .mobile-only { display: none !important; }
+        }
+        .floating-profile {
+          position: fixed;
+          top: 32px;
+          right: 48px;
+          z-index: 100;
+          display: flex;
+          align-items: center;
+          background: #fff;
+          border-radius: 2rem;
+          box-shadow: 0 2px 8px rgba(80,80,120,0.08);
+          padding: 0.5rem;
+          border: 1.5px solid #ededed;
+          min-width: unset;
+          transition: box-shadow 0.2s;
+          gap: 0;
+        }
+        .floating-profile:hover, .floating-profile:focus-within {
+          box-shadow: 0 6px 24px rgba(80,80,120,0.13);
+        }
+        .profile-avatar {
+          width: 2.5rem;
+          height: 2.5rem;
+          background: linear-gradient(135deg, #6366f1 0%, #6d28d9 100%);
+          color: #fff;
+          font-weight: 700;
+          font-size: 1.2rem;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 1px 4px rgba(80,80,120,0.08);
+          letter-spacing: 0.5px;
+          cursor: pointer;
+          transition: box-shadow 0.2s;
+          z-index: 2;
+        }
+        .profile-toggle {
+          display: none;
+        }
+        .profile-dropdown-label {
+          display: block;
+          position: absolute;
+          right: 0.5rem;
+          top: 0.5rem;
+          width: 2.5rem;
+          height: 2.5rem;
+          cursor: pointer;
+          z-index: 3;
+        }
+        .profile-dropdown {
+          display: none;
+          position: absolute;
+          top: 3.5rem;
+          right: 0;
+          background: #fff;
+          border-radius: 1rem;
+          box-shadow: 0 4px 16px rgba(80,80,120,0.13);
+          border: 1.5px solid #ededed;
+          min-width: 140px;
+          padding: 0.5rem 0;
+          flex-direction: column;
+          z-index: 10;
+        }
+        .profile-dropdown-item {
+          display: block;
+          padding: 0.7rem 1.5rem;
+          color: #4b5563;
+          text-decoration: none;
+          font-weight: 500;
+          font-size: 1rem;
+          transition: background 0.2s, color 0.2s;
+          border: none;
+          background: none;
+          text-align: left;
+          cursor: pointer;
+        }
+        .profile-dropdown-item:hover {
+          background: #f3f4f6;
+          color: #6366f1;
+        }
+        .profile-toggle:checked ~ .profile-dropdown,
+        .floating-profile:focus-within .profile-dropdown {
+          display: flex;
+        }
+        @media (max-width: 900px) {
+          .floating-profile {
+            top: 4.5rem;
+          }
+        }
+        @media (max-width: 700px) {
+          .floating-profile {
+            top: 4.2rem;
+            right: 8px;
+            padding: 0.4rem;
+          }
+          .profile-avatar {
+            width: 2rem;
+            height: 2rem;
+            font-size: 1rem;
+          }
+          .profile-dropdown-label {
+            width: 2rem;
+            height: 2rem;
+            top: 0.2rem;
+            right: 0.2rem;
+          }
+        }
+        @media (max-width: 700px) {
+          .pill-navbar {
+            display: none !important;
+          }
+          .profile-dropdown .mobile-only {
+            display: block !important;
+          }
+        }
     </style>
 </head>
 <body>
+    <!-- Pill Navigation Bar -->
     <nav class="pill-navbar" aria-label="Main Navigation">
       <ul class="pill-nav-list">
         <li><a href="dashboard.html" class="pill-nav-link">Dashboard</a></li>
@@ -988,6 +1109,22 @@
         <li><a href="mastery.html" class="pill-nav-link">Mastery</a></li>
       </ul>
     </nav>
+    <!-- Floating Profile Box -->
+    <div class="floating-profile" tabindex="0">
+      <div class="profile-avatar">JD</div>
+      <input type="checkbox" id="profile-toggle" class="profile-toggle" aria-label="Open profile menu">
+      <label for="profile-toggle" class="profile-dropdown-label"></label>
+      <div class="profile-dropdown">
+        <a href="dashboard.html" class="profile-dropdown-item mobile-only">Dashboard</a>
+        <a href="jobs.html" class="profile-dropdown-item mobile-only active">Jobs</a>
+        <a href="resume.html" class="profile-dropdown-item mobile-only">Resume</a>
+        <a href="interview.html" class="profile-dropdown-item mobile-only">Interview</a>
+        <a href="mastery.html" class="profile-dropdown-item mobile-only">Mastery</a>
+        <a href="saved_jobs.html" class="profile-dropdown-item mobile-only">Saved Jobs</a>
+        <a href="profile.html" class="profile-dropdown-item">Profile</a>
+        <a href="home.html" class="profile-dropdown-item">Sign Out</a>
+      </div>
+    </div>
 
     <!-- Main Content -->
     <main class="main-content" style="margin-top: 5.5rem;">

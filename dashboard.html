@@ -386,15 +386,10 @@
       }
       @media (max-width: 700px) {
         .pill-navbar {
-          top: 1.2rem;
+          display: none !important;
         }
-        .pill-nav-list {
-          gap: 0.5rem;
-          padding: 0.5rem 0.5rem;
-        }
-        .pill-nav-link {
-          font-size: 1rem;
-          padding: 0.6rem 1rem;
+        .profile-dropdown .mobile-only {
+          display: block !important;
         }
       }
       .floating-profile {
@@ -504,6 +499,10 @@
           right: 0.2rem;
         }
       }
+      /* Show mobile-only links only on mobile, hide on desktop */
+      .profile-dropdown .mobile-only {
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -524,6 +523,13 @@
       <input type="checkbox" id="profile-toggle" class="profile-toggle" aria-label="Open profile menu">
       <label for="profile-toggle" class="profile-dropdown-label"></label>
       <div class="profile-dropdown">
+        <!-- Desktop: Only Profile/Sign Out; Mobile: All links -->
+        <a href="dashboard.html" class="profile-dropdown-item mobile-only">Dashboard</a>
+        <a href="jobs.html" class="profile-dropdown-item mobile-only">Jobs</a>
+        <a href="resume.html" class="profile-dropdown-item mobile-only">Resume</a>
+        <a href="interview.html" class="profile-dropdown-item mobile-only">Interview</a>
+        <a href="mastery.html" class="profile-dropdown-item mobile-only">Mastery</a>
+        <a href="saved_jobs.html" class="profile-dropdown-item mobile-only">Saved Jobs</a>
         <a href="profile.html" class="profile-dropdown-item">Profile</a>
         <a href="home.html" class="profile-dropdown-item">Sign Out</a>
       </div>
@@ -932,7 +938,7 @@
                 <div
                   class="text-xs font-medium px-2 py-1 bg-green-100 text-green-700 rounded-full"
                 >
-                  Verified
+                  Completed
                 </div>
               </div>
 
@@ -951,7 +957,7 @@
                 <div
                   class="text-xs font-medium px-2 py-1 bg-green-100 text-green-700 rounded-full"
                 >
-                  Verified
+                  Completed
                 </div>
               </div>
 
@@ -989,7 +995,7 @@
                 <div
                   class="text-xs font-medium px-2 py-1 bg-green-100 text-green-700 rounded-full"
                 >
-                  Verified
+                  Completed
                 </div>
               </div>
             </div>
@@ -1174,14 +1180,14 @@
                   </div>
                   <div class="flex-1">
                     <div class="text-sm font-medium text-gray-800">
-                      Google Technical Interview
+                      Flipkart GRiD 7.0
                     </div>
-                    <div class="text-xs text-gray-500">Today, 3:00 PM</div>
+                    <div class="text-xs text-gray-500">4 days to go</div>
                   </div>
                   <button
                     class="text-xs font-medium px-3 py-1.5 bg-white text-gray-700 rounded border border-gray-200 hover:bg-gray-50 !rounded-button whitespace-nowrap"
                   >
-                    Prepare
+                    Apply Now
                   </button>
                 </div>
 
@@ -1212,14 +1218,14 @@
                   </div>
                   <div class="flex-1">
                     <div class="text-sm font-medium text-gray-800">
-                      Microsoft Assessment Test
+                      Walmart Sparkathon
                     </div>
-                    <div class="text-xs text-gray-500">June 28, 2025</div>
+                    <div class="text-xs text-gray-500">July 14, 2025</div>
                   </div>
                   <button
                     class="text-xs font-medium px-3 py-1.5 bg-white text-gray-700 rounded border border-gray-200 hover:bg-gray-50 !rounded-button whitespace-nowrap"
                   >
-                    Study
+                    Apply Now
                   </button>
                 </div>
               </div>

@@ -201,15 +201,10 @@
       }
       @media (max-width: 700px) {
         .pill-navbar {
-          top: 0.1px;
+          display: none !important;
         }
-        .pill-nav-list {
-          gap: 0.5rem;
-          padding: 0.5rem 0.5rem;
-        }
-        .pill-nav-link {
-          font-size: 1rem;
-          padding: 0.6rem 1rem;
+        .profile-dropdown .mobile-only {
+          display: block !important;
         }
       }
       .floating-profile {
@@ -319,6 +314,13 @@
           right: 0.2rem;
         }
       }
+      @media (min-width: 701px) {
+        .profile-dropdown .mobile-only { display: none !important; }
+        .profile-dropdown .desktop-only { display: block !important; }
+      }
+      @media (max-width: 700px) {
+        .profile-dropdown .desktop-only { display: none !important; }
+      }
     </style>
   </head>
   <body class="bg-gray-50 min-h-screen">
@@ -339,8 +341,14 @@
       <input type="checkbox" id="profile-toggle" class="profile-toggle" aria-label="Open profile menu">
       <label for="profile-toggle" class="profile-dropdown-label"></label>
       <div class="profile-dropdown">
-        <a href="profile.html" class="profile-dropdown-item">Profile</a>
-        <a href="home.html" class="profile-dropdown-item">Sign Out</a>
+        <a href="dashboard.html" class="profile-dropdown-item mobile-only">Dashboard</a>
+        <a href="jobs.html" class="profile-dropdown-item mobile-only">Jobs</a>
+        <a href="resume.html" class="profile-dropdown-item mobile-only active">Resume</a>
+        <a href="interview.html" class="profile-dropdown-item mobile-only">Interview</a>
+        <a href="mastery.html" class="profile-dropdown-item mobile-only">Mastery</a>
+        <a href="saved_jobs.html" class="profile-dropdown-item mobile-only">Saved Jobs</a>
+        <a href="profile.html" class="profile-dropdown-item mobile-only desktop-only">Profile</a>
+        <a href="home.html" class="profile-dropdown-item mobile-only desktop-only">Sign Out</a>
       </div>
     </div>
 
